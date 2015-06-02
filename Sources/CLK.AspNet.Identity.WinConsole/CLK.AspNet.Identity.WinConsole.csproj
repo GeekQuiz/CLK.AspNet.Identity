@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IdentityModels.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -65,10 +66,6 @@
     <ProjectReference Include="..\CLK.AspNet.Identity.EntityFramework\CLK.AspNet.Identity.EntityFramework.csproj">
       <Project>{003fa076-76a3-4f50-be9e-f49e43ae8f9e}</Project>
       <Name>CLK.AspNet.Identity.EntityFramework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CLK.AspNet.Identity\CLK.AspNet.Identity.csproj">
-      <Project>{0b65e1fc-e478-49c9-a83b-6d86f873d741}</Project>
-      <Name>CLK.AspNet.Identity</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
