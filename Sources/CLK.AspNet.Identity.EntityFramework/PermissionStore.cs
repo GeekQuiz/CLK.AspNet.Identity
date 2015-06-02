@@ -31,7 +31,7 @@ namespace CLK.AspNet.Identity.EntityFramework
     public class PermissionStore<TPermission, TRole, TKey, TUserRole, TPermissionRole> : IPermissionRoleStore<TPermission, TKey>, IQueryablePermissionStore<TPermission, TKey>
         where TKey : IEquatable<TKey>
         where TPermission : IdentityPermission<TKey, TPermissionRole>
-        where TRole : IdentityRole<TKey, TUserRole>
+        where TRole : IdentityRole<TKey, TUserRole, TPermissionRole>
         where TUserRole : IdentityUserRole<TKey>, new()
         where TPermissionRole : IdentityPermissionRole<TKey>, new()
     {

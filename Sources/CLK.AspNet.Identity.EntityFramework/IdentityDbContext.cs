@@ -50,7 +50,7 @@ namespace CLK.AspNet.Identity.EntityFramework
 
     public class IdentityDbContext<TUser, TRole, TPermission, TKey, TUserLogin, TUserRole, TUserClaim, TPermissionRole> : IdentityDbContext<TUser, TRole, TKey, TUserLogin, TUserRole, TUserClaim>
         where TUser : IdentityUser<TKey, TUserLogin, TUserRole, TUserClaim>
-        where TRole : IdentityRole<TKey, TUserRole>
+        where TRole : IdentityRole<TKey, TUserRole, TPermissionRole>
         where TPermission : IdentityPermission<TKey, TPermissionRole>
         where TUserLogin : IdentityUserLogin<TKey>
         where TUserRole : IdentityUserRole<TKey>
@@ -87,6 +87,12 @@ namespace CLK.AspNet.Identity.EntityFramework
             // Base
             base.OnModelCreating(modelBuilder);
 
+            // Role
+            var role = modelBuilder.Entity<TRole>()
+                .ToTable("AspNetRoles");
+            
+            role.HasMany(r => r.Permissions).WithRequired().HasForeignKey(pr => pr.PermissionId);
+        
             // Permission
             var permission = modelBuilder.Entity<TPermission>()
                 .ToTable("AspNetPermissions");
