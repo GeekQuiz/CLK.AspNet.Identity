@@ -84,6 +84,9 @@ namespace CLK.AspNet.Identity.EntityFramework
 
             #endregion
 
+            // Base
+            base.OnModelCreating(modelBuilder);
+
             // Permission
             var permission = modelBuilder.Entity<TPermission>()
                 .ToTable("AspNetPermissions");
@@ -125,6 +128,8 @@ namespace CLK.AspNet.Identity.EntityFramework
                     return new DbEntityValidationResult(entityEntry, errors);
                 }
             }
+
+            // Base
             return base.ValidateEntity(entityEntry, items);
         }
     }
