@@ -24,33 +24,33 @@ namespace CLK.AspNet.Identity.WinConsole
                 const string writePermissionName = "write";
                 const string readPermissionName = "read";
 
-                // Manager
-                var userManager = new ApplicationUserManager(datebaseContext);
-                var roleManager = new ApplicationRoleManager(datebaseContext);
+                //// Manager
+                //var userManager = new ApplicationUserManager(datebaseContext);
+                //var roleManager = new ApplicationRoleManager(datebaseContext);
                 
-                // Role
-                var role = roleManager.FindByName(roleName);
-                if (role == null)
-                {
-                    role = new ApplicationRole(roleName);
-                    roleManager.Create(role);
-                }
+                //// Role
+                //var role = roleManager.FindByName(roleName);
+                //if (role == null)
+                //{
+                //    role = new ApplicationRole(roleName);
+                //    roleManager.Create(role);
+                //}
 
-                // User
-                var user = userManager.FindByName(userName);
-                if (user == null)
-                {
-                    user = new ApplicationUser { UserName = userName, Email = email };
-                    userManager.Create(user, password);
-                    userManager.SetLockoutEnabled(user.Id, false);
-                }
+                //// User
+                //var user = userManager.FindByName(userName);
+                //if (user == null)
+                //{
+                //    user = new ApplicationUser { UserName = userName, Email = email };
+                //    userManager.Create(user, password);
+                //    userManager.SetLockoutEnabled(user.Id, false);
+                //}
 
-                // UserRole
-                var userRoleNames = userManager.GetRoles(user.Id);
-                if (userRoleNames.Contains(role.Name) == false)
-                {
-                    userManager.AddToRole(user.Id, role.Name);
-                }
+                //// UserRole
+                //var userRoleNames = userManager.GetRoles(user.Id);
+                //if (userRoleNames.Contains(role.Name) == false)
+                //{
+                //    userManager.AddToRole(user.Id, role.Name);
+                //}
             }
 
             Console.Write("End...");

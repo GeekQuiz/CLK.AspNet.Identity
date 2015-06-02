@@ -20,45 +20,45 @@ namespace CLK.AspNet.Identity.WinConsole
         public ApplicationDbContext() : base("DefaultConnection") { }
 
         public ApplicationDbContext(string nameOrConnectionString) : base(nameOrConnectionString) { }
-
-
-        // Properties
-        new public virtual IDbSet<ApplicationRole> Roles { get; set; }
     }
 
     // Identity
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser<string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>
     {
         public ApplicationUser() : base() { }
 
-        public ApplicationUser(string name) : base(name) { }
+        //public ApplicationUser(string name) : base(name) { }
     }
 
-    public class ApplicationRole : IdentityRole
+    public class ApplicationRole : IdentityRole<string, IdentityUserRole>
     {
         public ApplicationRole() : base() { }
 
-        public ApplicationRole(string name) : base(name) { }
+        //public ApplicationRole(string name) : base(name) { }
+    }
+
+    public class ApplicationPermission : IdentityPermission<string, IdentityPermissionRole>
+    {
+        public ApplicationPermission() : base() { }
+
+        //public ApplicationPermission(string name) : base(name) { }
     }
 
 
     // Manager
-    public class ApplicationUserManager : UserManager<ApplicationUser>
-    {
-        // Constuctors
-        public ApplicationUserManager(ApplicationDbContext context) : this(new UserStore<ApplicationUser>(context)) { }
+    //public class ApplicationUserManager : UserManager<ApplicationUser>
+    //{
+    //    // Constuctors
+    //    public ApplicationUserManager(ApplicationDbContext context) : this(new UserStore<ApplicationUser>(context)) { }
 
-        public ApplicationUserManager(UserStore<ApplicationUser> store) : base(store) { }
-    }
+    //    public ApplicationUserManager(UserStore<ApplicationUser> store) : base(store) { }
+    //}
 
-    public class ApplicationRoleManager : RoleManager<ApplicationRole>
-    {
-        // Constuctors
-        public ApplicationRoleManager(ApplicationDbContext context) : this(new RoleStore<ApplicationRole>(context)) { }
+    //public class ApplicationRoleManager : RoleManager<ApplicationRole>
+    //{
+    //    // Constuctors
+    //    public ApplicationRoleManager(ApplicationDbContext context) : this(new RoleStore<ApplicationRole>(context)) { }
 
-        public ApplicationRoleManager(RoleStore<ApplicationRole> store) : base(store) { }
-    }
-
-
-    
+    //    public ApplicationRoleManager(RoleStore<ApplicationRole> store) : base(store) { }
+    //}
 }
