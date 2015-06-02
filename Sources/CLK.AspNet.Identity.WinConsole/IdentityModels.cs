@@ -13,6 +13,19 @@ using System.Threading.Tasks;
 
 namespace CLK.AspNet.Identity.WinConsole
 {
+    // DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole>
+    {
+        // Constructors
+        public ApplicationDbContext() : base("DefaultConnection") { }
+
+        public ApplicationDbContext(string nameOrConnectionString) : base(nameOrConnectionString) { }
+
+
+        // Properties
+        new public virtual IDbSet<ApplicationRole> Roles { get; set; }
+    }
+
     // Identity
     public class ApplicationUser : IdentityUser
     {
@@ -47,16 +60,5 @@ namespace CLK.AspNet.Identity.WinConsole
     }
 
 
-    // DbContext
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole>
-    {
-        // Constructors
-        public ApplicationDbContext() : base("DefaultConnection") { }
-
-        public ApplicationDbContext(string nameOrConnectionString) : base(nameOrConnectionString) { }
-
-
-        // Properties
-        new public virtual IDbSet<ApplicationRole> Roles { get; set; }
-    }
+    
 }

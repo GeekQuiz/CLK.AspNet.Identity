@@ -4,12 +4,6 @@ using System.Threading.Tasks;
 
 namespace CLK.AspNet.Identity
 {
-    public interface IPermissionStore<TPermission> : IPermissionStore<TPermission, string>
-        where TPermission : class, IPermission<string>
-    {
-
-    }
-
     public interface IPermissionStore<TPermission, in TKey> : IDisposable 
         where TPermission : class, IPermission<TKey>
     {

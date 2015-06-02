@@ -9,13 +9,6 @@ using System.Threading.Tasks;
 
 namespace CLK.AspNet.Identity
 {
-    public class PermissionManager<TPermission> : PermissionManager<TPermission, string>
-        where TPermission : class, IPermission<string>
-    {
-        // Constructors
-        public PermissionManager(IPermissionStore<TPermission> store) : base(store) { }
-    }
-
     public class PermissionManager<TPermission, TKey> : IDisposable
         where TPermission : class, IPermission<TKey>
         where TKey : IEquatable<TKey>
@@ -25,7 +18,7 @@ namespace CLK.AspNet.Identity
 
         private IPermissionStore<TPermission, TKey> _store = null;
 
-        private IIdentityValidator<TPermission> _permissionValidator = null;
+        private PermissionValidator<TPermission, TKey> _validator = null;
 
 
         // Constructors
@@ -39,7 +32,7 @@ namespace CLK.AspNet.Identity
 
             // Default
             _store = store;
-            _permissionValidator = new PermissionValidator<TPermission, TKey>(this);
+            _validator = new PermissionValidator<TPermission, TKey>(store);
         }
 
         public void Dispose()
@@ -81,7 +74,7 @@ namespace CLK.AspNet.Identity
                 this.ThrowIfDisposed();
 
                 // Return
-                return _permissionValidator;
+                return _validator;
             }
         }
 
