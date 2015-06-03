@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CLK.AspNet.Identity.EntityFramework
 {
-    public class UserManager<TUser, TRole> : CLK.AspNet.Identity.UserManager<TUser>
+    public class UserManager<TUser, TRole> : Microsoft.AspNet.Identity.UserManager<TUser, string>
         where TUser : IdentityUser<string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>, new()
         where TRole : IdentityRole<string, IdentityUserRole, IdentityPermissionRole>, new()
     {

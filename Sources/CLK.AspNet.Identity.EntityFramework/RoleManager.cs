@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CLK.AspNet.Identity.EntityFramework
 {
-    public class RoleManager<TRole> : CLK.AspNet.Identity.RoleManager<TRole>
+    public class RoleManager<TRole> : Microsoft.AspNet.Identity.RoleManager<TRole, string>
         where TRole : IdentityRole<string, IdentityUserRole, IdentityPermissionRole>, new()
     {
         // Constuctors

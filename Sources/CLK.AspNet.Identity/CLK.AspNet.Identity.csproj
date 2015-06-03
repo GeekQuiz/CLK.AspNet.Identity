@@ -71,8 +71,6 @@
     <Compile Include="PermissionValidator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="RoleManager.cs" />
-    <Compile Include="UserManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
