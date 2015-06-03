@@ -63,11 +63,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CLK.AspNet.Identity.EntityFramework\CLK.AspNet.Identity.EntityFramework.csproj">
+    <ProjectReference Include="..\..\CLK.AspNet.Identity.EntityFramework\CLK.AspNet.Identity.EntityFramework.csproj">
       <Project>{003fa076-76a3-4f50-be9e-f49e43ae8f9e}</Project>
       <Name>CLK.AspNet.Identity.EntityFramework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CLK.AspNet.Identity\CLK.AspNet.Identity.csproj">
+    <ProjectReference Include="..\..\CLK.AspNet.Identity\CLK.AspNet.Identity.csproj">
       <Project>{0b65e1fc-e478-49c9-a83b-6d86f873d741}</Project>
       <Name>CLK.AspNet.Identity</Name>
     </ProjectReference>
