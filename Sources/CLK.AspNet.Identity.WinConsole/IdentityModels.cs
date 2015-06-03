@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace CLK.AspNet.Identity.WinConsole
 {
     // DbContext
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole>
+    public class ApplicationDbContext : CLK.AspNet.Identity.EntityFramework.IdentityDbContext<ApplicationUser, ApplicationRole, ApplicationPermission>
     {
         // Constructors
         public ApplicationDbContext() : base("DefaultConnection") { }
@@ -23,25 +23,28 @@ namespace CLK.AspNet.Identity.WinConsole
     }
 
     // Identity
-    public class ApplicationUser : IdentityUser<string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>
+    public class ApplicationUser : CLK.AspNet.Identity.EntityFramework.IdentityUser
     {
+        // Constructors
         public ApplicationUser() : base() { }
 
-        //public ApplicationUser(string name) : base(name) { }
+        public ApplicationUser(string name) : base(name) { }
     }
 
-    public class ApplicationRole : IdentityRole<string, IdentityUserRole>
+    public class ApplicationRole : CLK.AspNet.Identity.EntityFramework.IdentityRole
     {
+        // Constructors
         public ApplicationRole() : base() { }
 
-        //public ApplicationRole(string name) : base(name) { }
+        public ApplicationRole(string name) : base(name) { }
     }
 
-    public class ApplicationPermission : IdentityPermission<string, IdentityPermissionRole>
+    public class ApplicationPermission : CLK.AspNet.Identity.EntityFramework.IdentityPermission
     {
+        // Constructors
         public ApplicationPermission() : base() { }
 
-        //public ApplicationPermission(string name) : base(name) { }
+        public ApplicationPermission(string name) : base(name) { }
     }
 
 
