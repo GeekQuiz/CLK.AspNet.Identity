@@ -1,6 +1,5 @@
-﻿using CLK.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
+﻿using CLK.AspNet.Identity;
+using CLK.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -21,6 +20,7 @@ namespace CLK.AspNet.Identity.WinConsole
 
         public ApplicationDbContext(string nameOrConnectionString) : base(nameOrConnectionString) { }
     }
+
 
     // Identity
     public class ApplicationUser : CLK.AspNet.Identity.EntityFramework.IdentityUser
@@ -49,19 +49,21 @@ namespace CLK.AspNet.Identity.WinConsole
 
 
     // Manager
-    //public class ApplicationUserManager : UserManager<ApplicationUser>
-    //{
-    //    // Constuctors
-    //    public ApplicationUserManager(ApplicationDbContext context) : this(new UserStore<ApplicationUser>(context)) { }
+    public class ApplicationUserManager : CLK.AspNet.Identity.EntityFramework.UserManager<ApplicationUser, ApplicationRole>
+    {
+        // Constuctors
+        public ApplicationUserManager(ApplicationDbContext context) : base(context) { }
+    }
 
-    //    public ApplicationUserManager(UserStore<ApplicationUser> store) : base(store) { }
-    //}
+    public class ApplicationRoleManager : CLK.AspNet.Identity.EntityFramework.RoleManager<ApplicationRole>
+    {
+        // Constuctors
+        public ApplicationRoleManager(ApplicationDbContext context) : base(context) { }
+    }
 
-    //public class ApplicationRoleManager : RoleManager<ApplicationRole>
-    //{
-    //    // Constuctors
-    //    public ApplicationRoleManager(ApplicationDbContext context) : this(new RoleStore<ApplicationRole>(context)) { }
-
-    //    public ApplicationRoleManager(RoleStore<ApplicationRole> store) : base(store) { }
-    //}
+    public class ApplicationPermissionManager : CLK.AspNet.Identity.EntityFramework.PermissionManager<ApplicationRole, ApplicationPermission>
+    {
+        // Constuctors
+        public ApplicationPermissionManager(ApplicationDbContext context) : base(context) { }
+    }
 }

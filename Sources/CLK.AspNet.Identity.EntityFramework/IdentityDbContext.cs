@@ -78,7 +78,7 @@ namespace CLK.AspNet.Identity.EntityFramework
             var role = modelBuilder.Entity<TRole>()
                 .ToTable("AspNetRoles");
 
-            role.HasMany(r => r.Permissions).WithRequired().HasForeignKey(pr => pr.PermissionId);
+            role.HasMany(r => r.Permissions).WithRequired().HasForeignKey(pr => pr.RoleId);
 
             // Permission
             var permission = modelBuilder.Entity<TPermission>()

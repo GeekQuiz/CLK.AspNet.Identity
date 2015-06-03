@@ -12,9 +12,17 @@ using System.Threading.Tasks;
 
 namespace CLK.AspNet.Identity.EntityFramework
 {
-    public class PermissionStore<TPermission, TRole, TKey, TUserRole, TPermissionRole> : IPermissionRoleStore<TPermission, TKey>, IQueryablePermissionStore<TPermission, TKey>
-        where TPermission : IdentityPermission<TKey, TPermissionRole>, new()
+    public class PermissionStore<TRole, TPermission> : PermissionStore<TRole, TPermission, string, IdentityUserRole, IdentityPermissionRole>
+        where TRole : IdentityRole<string, IdentityUserRole, IdentityPermissionRole>, new()
+        where TPermission : IdentityPermission<string, IdentityPermissionRole>, new()
+    {
+        // Constructors
+        public PermissionStore(DbContext context) : base(context) { }
+    }
+
+    public class PermissionStore<TRole, TPermission, TKey, TUserRole, TPermissionRole> : IPermissionRoleStore<TPermission, TKey>, IQueryablePermissionStore<TPermission, TKey>
         where TRole : IdentityRole<TKey, TUserRole>, new()
+        where TPermission : IdentityPermission<TKey, TPermissionRole>, new()
         where TKey : IEquatable<TKey>
         where TUserRole : IdentityUserRole<TKey>, new()
         where TPermissionRole : IdentityPermissionRole<TKey>, new()
@@ -22,9 +30,9 @@ namespace CLK.AspNet.Identity.EntityFramework
         // Fields
         private bool _disposed = false;
 
-        private EntityStore<TPermission> _permissionStore = null;
-
         private EntityStore<TRole> _roleStore = null;
+
+        private EntityStore<TPermission> _permissionStore = null;
 
         private IDbSet<TPermissionRole> _permissionRoles = null;
 

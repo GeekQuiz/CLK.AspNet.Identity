@@ -9,6 +9,13 @@ using System.Threading.Tasks;
 
 namespace CLK.AspNet.Identity
 {
+    public class PermissionManager<TPermission> : PermissionManager<TPermission, string>
+        where TPermission : class, IPermission<string>
+    {
+        // Constructors
+        public PermissionManager(IPermissionStore<TPermission, string> store) : base(store) { }
+    }
+
     public class PermissionManager<TPermission, TKey> : IDisposable
         where TPermission : class, IPermission<TKey>
         where TKey : IEquatable<TKey>
