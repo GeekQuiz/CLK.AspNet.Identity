@@ -16,10 +16,10 @@ using System.Linq;
 
 namespace CLK.AspNet.Identity.EntityFramework
 {
-    public class IdentityDbContext<TUser, TRole, TPermission> : IdentityDbContext<TUser, TRole, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>
-        where TUser : IdentityUser<string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>
-        where TRole : IdentityRole<string, IdentityUserRole, IdentityPermissionRole>
-        where TPermission : IdentityPermission<string, IdentityPermissionRole>
+    public class IdentityDbContext<TUser, TRole, TPermission> : Microsoft.AspNet.Identity.EntityFramework.IdentityDbContext<TUser, TRole, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>
+        where TUser : IdentityUser
+        where TRole : IdentityRole
+        where TPermission : IdentityPermission
     {
         // Constructors
         public IdentityDbContext() : base("DefaultConnection") { }

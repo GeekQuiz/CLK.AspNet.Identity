@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CLK.AspNet.Identity.EntityFramework
 {
-    public class IdentityPermission : IdentityPermission<string, IdentityPermissionRole>
+    public class IdentityPermission : CLK.AspNet.Identity.IPermission<string>
     {
         // Constructors
         public IdentityPermission()
@@ -11,6 +11,7 @@ namespace CLK.AspNet.Identity.EntityFramework
             // Default
             this.Id = Guid.NewGuid().ToString();
             this.Name = this.Id;
+            this.Roles = new List<IdentityPermissionRole>();
         }
 
         public IdentityPermission(string name)
@@ -24,25 +25,15 @@ namespace CLK.AspNet.Identity.EntityFramework
             // Default
             this.Id = Guid.NewGuid().ToString();
             this.Name = name;
-        }
-    }
-
-    public class IdentityPermission<TKey, TPermissionRole> : IPermission<TKey>
-        where TPermissionRole : IdentityPermissionRole<TKey>
-    {
-        // Constructors
-        public IdentityPermission()
-        {
-            // Default
-            this.Roles = new List<TPermissionRole>();
+            this.Roles = new List<IdentityPermissionRole>();
         }
 
 
         // Properties
-        public virtual TKey Id { get; set; }
+        public virtual string Id { get; set; }
 
         public virtual string Name { get; set; }
 
-        public virtual ICollection<TPermissionRole> Roles { get; private set; }        
+        public virtual ICollection<IdentityPermissionRole> Roles { get; private set; }        
     }
 }

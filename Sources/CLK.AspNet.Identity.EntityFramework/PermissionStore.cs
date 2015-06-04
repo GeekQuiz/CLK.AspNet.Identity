@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace CLK.AspNet.Identity.EntityFramework
 {
-    public class PermissionStore<TRole, TPermission> : IPermissionRoleStore<TPermission, string>, IQueryablePermissionStore<TPermission, string>
-        where TRole : IdentityRole<string, IdentityUserRole, IdentityPermissionRole>, new()
-        where TPermission : IdentityPermission<string, IdentityPermissionRole>, new()
+    public class PermissionStore<TRole, TPermission> : CLK.AspNet.Identity.IPermissionRoleStore<TPermission, string>, CLK.AspNet.Identity.IQueryablePermissionStore<TPermission, string>
+        where TRole : IdentityRole, new()
+        where TPermission : IdentityPermission, new()
     {
         // Fields
         private bool _disposed = false;

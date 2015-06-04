@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CLK.AspNet.Identity.EntityFramework
 {
-    public class IdentityRole : IdentityRole<string, IdentityUserRole, IdentityPermissionRole>
+    public class IdentityRole : Microsoft.AspNet.Identity.EntityFramework.IdentityRole<string, IdentityUserRole>
     {
         // Constructors
         public IdentityRole()
@@ -15,6 +15,7 @@ namespace CLK.AspNet.Identity.EntityFramework
             // Default
             this.Id = Guid.NewGuid().ToString();
             this.Name = this.Id;
+            this.Permissions = new List<IdentityPermissionRole>();
         }
 
         public IdentityRole(string name)
@@ -28,22 +29,11 @@ namespace CLK.AspNet.Identity.EntityFramework
             // Default
             this.Id = Guid.NewGuid().ToString();
             this.Name = name;
-        }
-    }
-
-    public class IdentityRole<TKey, TUserRole, TPermissionRole> : IdentityRole<TKey, TUserRole>
-        where TUserRole : IdentityUserRole<TKey>
-        where TPermissionRole : IdentityPermissionRole<TKey>
-    {
-        // Constructor
-        public IdentityRole()
-        {
-            // Default
-            this.Permissions = new List<TPermissionRole>();
+            this.Permissions = new List<IdentityPermissionRole>();
         }
 
 
         // Properties
-        public virtual ICollection<TPermissionRole> Permissions { get; private set; }
+        public virtual ICollection<IdentityPermissionRole> Permissions { get; private set; }
     }
 }

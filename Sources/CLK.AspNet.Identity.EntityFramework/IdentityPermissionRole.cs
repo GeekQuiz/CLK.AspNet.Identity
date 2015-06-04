@@ -3,16 +3,11 @@ using System.Collections.Generic;
 
 namespace CLK.AspNet.Identity.EntityFramework
 {
-    public class IdentityPermissionRole : IdentityPermissionRole<string>
-    {
-
-    }
-
-    public class IdentityPermissionRole<TKey>
+    public class IdentityPermissionRole
     {
         // Properties
-        public virtual TKey PermissionId { get; set; }
+        public virtual string PermissionId { get; set; }
 
-        public virtual TKey RoleId { get; set; }
+        public virtual string RoleId { get; set; }
     }
 }

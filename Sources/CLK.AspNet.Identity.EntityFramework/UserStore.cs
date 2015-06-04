@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace CLK.AspNet.Identity.EntityFramework
 {
-    public class UserStore<TUser, TRole> : UserStore<TUser, TRole, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>
-        where TUser : IdentityUser<string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>, new()
-        where TRole : IdentityRole<string, IdentityUserRole, IdentityPermissionRole>, new()
+    public class UserStore<TUser, TRole> : Microsoft.AspNet.Identity.EntityFramework.UserStore<TUser, TRole, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>
+        where TUser : IdentityUser, new()
+        where TRole : IdentityRole, new()
     {
         // Constructors
         public UserStore(DbContext context) : base(context) { }

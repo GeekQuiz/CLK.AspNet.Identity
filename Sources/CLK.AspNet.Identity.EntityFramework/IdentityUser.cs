@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CLK.AspNet.Identity.EntityFramework
 {
-    public class IdentityUser : IdentityUser<string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>
+    public class IdentityUser : Microsoft.AspNet.Identity.EntityFramework.IdentityUser
     {
         // Constructors
         public IdentityUser()

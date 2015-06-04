@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace CLK.AspNet.Identity.EntityFramework
 {
-    public class RoleStore<TRole> : RoleStore<TRole, string, IdentityUserRole>
-        where TRole : IdentityRole<string, IdentityUserRole, IdentityPermissionRole>, new()
+    public class RoleStore<TRole> : Microsoft.AspNet.Identity.EntityFramework.RoleStore<TRole, string, IdentityUserRole>
+        where TRole : IdentityRole, new()
     {
         // Constructors
         public RoleStore(DbContext context) : base(context) { }
