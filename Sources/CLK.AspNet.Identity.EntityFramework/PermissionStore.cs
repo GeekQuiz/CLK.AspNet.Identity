@@ -12,20 +12,9 @@ using System.Threading.Tasks;
 
 namespace CLK.AspNet.Identity.EntityFramework
 {
-    public class PermissionStore<TRole, TPermission> : PermissionStore<TRole, TPermission, string, IdentityUserRole, IdentityPermissionRole>
+    public class PermissionStore<TRole, TPermission> : IPermissionRoleStore<TPermission, string>, IQueryablePermissionStore<TPermission, string>
         where TRole : IdentityRole<string, IdentityUserRole, IdentityPermissionRole>, new()
         where TPermission : IdentityPermission<string, IdentityPermissionRole>, new()
-    {
-        // Constructors
-        public PermissionStore(DbContext context) : base(context) { }
-    }
-
-    public class PermissionStore<TRole, TPermission, TKey, TUserRole, TPermissionRole> : IPermissionRoleStore<TPermission, TKey>, IQueryablePermissionStore<TPermission, TKey>
-        where TRole : IdentityRole<TKey, TUserRole>, new()
-        where TPermission : IdentityPermission<TKey, TPermissionRole>, new()
-        where TKey : IEquatable<TKey>
-        where TUserRole : IdentityUserRole<TKey>, new()
-        where TPermissionRole : IdentityPermissionRole<TKey>, new()
     {
         // Fields
         private bool _disposed = false;
@@ -34,7 +23,7 @@ namespace CLK.AspNet.Identity.EntityFramework
 
         private EntityStore<TPermission> _permissionStore = null;
 
-        private IDbSet<TPermissionRole> _permissionRoles = null;
+        private IDbSet<IdentityPermissionRole> _permissionRoles = null;
 
 
         // Constructors
@@ -51,7 +40,7 @@ namespace CLK.AspNet.Identity.EntityFramework
             this.AutoSaveChanges = true;
             _permissionStore = new EntityStore<TPermission>(context);
             _roleStore = new EntityStore<TRole>(context);
-            _permissionRoles = context.Set<TPermissionRole>();
+            _permissionRoles = context.Set<IdentityPermissionRole>();
         }
 
         public void Dispose()
@@ -162,7 +151,7 @@ namespace CLK.AspNet.Identity.EntityFramework
             await this.SaveChanges().WithCurrentCulture();
         }
 
-        public virtual async Task<TPermission> FindByIdAsync(TKey permissionId)
+        public virtual async Task<TPermission> FindByIdAsync(string permissionId)
         {
             // Require
             this.ThrowIfDisposed();
@@ -233,7 +222,7 @@ namespace CLK.AspNet.Identity.EntityFramework
             if (roleEntity == null) throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, IdentityResources.RoleNotFound, roleName));
 
             // Add
-            _permissionRoles.Add(new TPermissionRole { PermissionId = permission.Id, RoleId = roleEntity.Id });
+            _permissionRoles.Add(new IdentityPermissionRole { PermissionId = permission.Id, RoleId = roleEntity.Id });
         }
 
         public virtual async Task RemoveFromRoleAsync(TPermission permission, string roleName)

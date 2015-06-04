@@ -12,13 +12,15 @@ namespace CLK.AspNet.Identity
        where TPermission : class, CLK.AspNet.Identity.IPermission<TKey>, new()
        where TKey : IEquatable<TKey>
     {
-        // Methods
+        // Properties
+        protected abstract PermissionManager<TPermission, TKey> PermissionManager { get; }
+
+
+        // Methods       
         public RBACAuthorize CreateAuthorize()
         {
             // Return
-            return new RBACAuthorize<TPermission, TKey>(this.GetPermissionManager);
+            return new RBACAuthorize<TPermission, TKey>(() => this.PermissionManager);
         }
-
-        protected abstract PermissionManager<TPermission, TKey> GetPermissionManager();
     }
 }

@@ -12,7 +12,7 @@ namespace CLK.AspNet.Identity.EntityFramework
         where TRole : IdentityRole<string, IdentityUserRole, IdentityPermissionRole>, new()
         where TPermission : IdentityPermission<string, IdentityPermissionRole>, new()
     {
-        // Constuctors
+        // Constructors
         public PermissionManager(DbContext context) : base(new CLK.AspNet.Identity.EntityFramework.PermissionStore<TRole, TPermission>(context)) { }
     }
 }

@@ -12,7 +12,7 @@ namespace CLK.AspNet.Identity.EntityFramework
         where TUser : IdentityUser<string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>, new()
         where TRole : IdentityRole<string, IdentityUserRole, IdentityPermissionRole>, new()
     {
-        // Constuctors
+        // Constructors
         public UserManager(DbContext context) : base(new CLK.AspNet.Identity.EntityFramework.UserStore<TUser, TRole>(context)) { }
     }
 }

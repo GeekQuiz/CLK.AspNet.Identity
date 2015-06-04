@@ -11,7 +11,7 @@ namespace CLK.AspNet.Identity.EntityFramework
     public class RoleManager<TRole> : Microsoft.AspNet.Identity.RoleManager<TRole, string>
         where TRole : IdentityRole<string, IdentityUserRole, IdentityPermissionRole>, new()
     {
-        // Constuctors
+        // Constructors
         public RoleManager(DbContext context) : base(new CLK.AspNet.Identity.EntityFramework.RoleStore<TRole>(context)) { }
     }
 }
