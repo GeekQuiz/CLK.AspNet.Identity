@@ -59,7 +59,7 @@ namespace CLK.AspNet.Identity.WinConsole
                 }
 
                 // PermissionRole
-                var permissionRoleNames = permissionManager.GetRoles(permission.Id);
+                var permissionRoleNames = permissionManager.GetRolesById(permission.Id);
                 if (permissionRoleNames.Contains(role.Name) == false)
                 {
                     permissionManager.AddToRole(permission.Id, role.Name);
@@ -67,7 +67,7 @@ namespace CLK.AspNet.Identity.WinConsole
             }
 
             Console.Write("End...");
-            //Console.ReadLine();
+            Console.ReadLine();
         }
 
         static TDatabaseContext CreateDatabaseContext<TDatabaseContext>()

@@ -127,7 +127,11 @@
   </data>
   <data name="PermissionIdNotFound" xml:space="preserve">
     <value>PermissionId not found.</value>
-    <comment>No user with this id found</comment>
+    <comment>No permission with this id found</comment>
+  </data>
+  <data name="PermissionNameNotFound" xml:space="preserve">
+    <value>PermissionName not found.</value>
+    <comment>No permission with this id found</comment>
   </data>
   <data name="PermissionNotInRole" xml:space="preserve">
     <value>Permission is not in role.</value>

@@ -16,33 +16,10 @@ using System.Linq;
 
 namespace CLK.AspNet.Identity.EntityFramework
 {
-    public class IdentityDbContext<TUser, TRole, TPermission> : IdentityDbContext<TUser, TRole, TPermission, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim, IdentityPermissionRole>
+    public class IdentityDbContext<TUser, TRole, TPermission> : IdentityDbContext<TUser, TRole, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>
         where TUser : IdentityUser<string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>
         where TRole : IdentityRole<string, IdentityUserRole, IdentityPermissionRole>
         where TPermission : IdentityPermission<string, IdentityPermissionRole>
-    {
-        // Constructors
-        public IdentityDbContext() : base("DefaultConnection") { }
-
-        public IdentityDbContext(string nameOrConnectionString) : base(nameOrConnectionString) { }
-
-        public IdentityDbContext(DbConnection existingConnection, DbCompiledModel model, bool contextOwnsConnection) : base(existingConnection, model, contextOwnsConnection) { }
-
-        public IdentityDbContext(DbCompiledModel model) : base(model) { }
-
-        public IdentityDbContext(DbConnection existingConnection, bool contextOwnsConnection) : base(existingConnection, contextOwnsConnection) { }
-
-        public IdentityDbContext(string nameOrConnectionString, DbCompiledModel model) : base(nameOrConnectionString, model) { }
-    }
-
-    public class IdentityDbContext<TUser, TRole, TPermission, TKey, TUserLogin, TUserRole, TUserClaim, TPermissionRole> : IdentityDbContext<TUser, TRole, TKey, TUserLogin, TUserRole, TUserClaim>
-        where TUser : Microsoft.AspNet.Identity.EntityFramework.IdentityUser<TKey, TUserLogin, TUserRole, TUserClaim>
-        where TRole : CLK.AspNet.Identity.EntityFramework.IdentityRole<TKey, TUserRole, TPermissionRole>
-        where TPermission : CLK.AspNet.Identity.EntityFramework.IdentityPermission<TKey, TPermissionRole>
-        where TUserLogin : Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<TKey>
-        where TUserRole : Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole<TKey>
-        where TUserClaim : Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<TKey>
-        where TPermissionRole : CLK.AspNet.Identity.EntityFramework.IdentityPermissionRole<TKey>
     {
         // Constructors
         public IdentityDbContext() : base("DefaultConnection") { }
@@ -92,7 +69,7 @@ namespace CLK.AspNet.Identity.EntityFramework
             permission.HasMany(p => p.Roles).WithRequired().HasForeignKey(pr => pr.PermissionId);
 
             // PermissionRole
-            var permissionRole = modelBuilder.Entity<TPermissionRole>()
+            var permissionRole = modelBuilder.Entity<IdentityPermissionRole>()
                 .HasKey(pr => new { pr.PermissionId, pr.RoleId })
                 .ToTable("AspNetPermissionRoles");
         }

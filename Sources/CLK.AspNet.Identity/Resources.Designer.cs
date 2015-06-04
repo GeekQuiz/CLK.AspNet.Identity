@@ -88,6 +88,15 @@ namespace CLK.AspNet.Identity {
         }
         
         /// <summary>
+        ///   查詢類似 PermissionName not found. 的當地語系化字串。
+        /// </summary>
+        internal static string PermissionNameNotFound {
+            get {
+                return ResourceManager.GetString("PermissionNameNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 Permission is not in role. 的當地語系化字串。
         /// </summary>
         internal static string PermissionNotInRole {

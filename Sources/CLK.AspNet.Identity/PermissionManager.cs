@@ -338,7 +338,7 @@ namespace CLK.AspNet.Identity
             return await UpdateAsync(permission).WithCurrentCulture();
         }
 
-        public virtual async Task<IList<string>> GetRolesAsync(TKey permissionId)
+        public virtual async Task<IList<string>> GetRolesByIdAsync(TKey permissionId)
         {
             // Require
             this.ThrowIfDisposed();
@@ -350,6 +350,23 @@ namespace CLK.AspNet.Identity
             // Permission
             var permission = await this.FindByIdAsync(permissionId).WithCurrentCulture();
             if (permission == null) throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, Resources.PermissionIdNotFound, permissionId));
+
+            // GetRoles
+            return await permissionRoleStore.GetRolesAsync(permission).WithCurrentCulture();
+        }
+
+        public virtual async Task<IList<string>> GetRolesByNameAsync(string permissionName)
+        {
+            // Require
+            this.ThrowIfDisposed();
+
+            // PermissionRoleStore
+            var permissionRoleStore = this.Store as IPermissionRoleStore<TPermission, TKey>;
+            if (permissionRoleStore == null) throw new NotSupportedException(Resources.StoreNotIPermissionRoleStore);
+
+            // Permission
+            var permission = await this.FindByNameAsync(permissionName).WithCurrentCulture();
+            if (permission == null) throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, Resources.PermissionNameNotFound, permissionName));
 
             // GetRoles
             return await permissionRoleStore.GetRolesAsync(permission).WithCurrentCulture();

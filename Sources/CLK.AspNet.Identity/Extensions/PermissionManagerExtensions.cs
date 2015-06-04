@@ -110,7 +110,7 @@ namespace CLK.AspNet.Identity
             return AsyncHelper.RunSync(() => manager.RemoveFromRolesAsync(permissionId, roles));
         }
 
-        public static IList<string> GetRoles<TPermission, TKey>(this PermissionManager<TPermission, TKey> manager, TKey permissionId)
+        public static IList<string> GetRolesById<TPermission, TKey>(this PermissionManager<TPermission, TKey> manager, TKey permissionId)
             where TKey : IEquatable<TKey>
             where TPermission : class, IPermission<TKey>
         {
@@ -118,7 +118,18 @@ namespace CLK.AspNet.Identity
             {
                 throw new ArgumentNullException("manager");
             }
-            return AsyncHelper.RunSync(() => manager.GetRolesAsync(permissionId));
+            return AsyncHelper.RunSync(() => manager.GetRolesByIdAsync(permissionId));
+        }
+
+        public static IList<string> GetRolesByName<TPermission, TKey>(this PermissionManager<TPermission, TKey> manager, string permissionName)
+            where TKey : IEquatable<TKey>
+            where TPermission : class, IPermission<TKey>
+        {
+            if (manager == null)
+            {
+                throw new ArgumentNullException("manager");
+            }
+            return AsyncHelper.RunSync(() => manager.GetRolesByNameAsync(permissionName));
         }
     }
 }

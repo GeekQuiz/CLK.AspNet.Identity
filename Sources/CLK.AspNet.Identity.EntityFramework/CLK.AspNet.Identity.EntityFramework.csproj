@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IdentityAuthorizeContext.cs" />
     <Compile Include="IdentityDbContext.cs" />
     <Compile Include="IdentityPermission.cs" />
     <Compile Include="IdentityPermissionRole.cs" />
