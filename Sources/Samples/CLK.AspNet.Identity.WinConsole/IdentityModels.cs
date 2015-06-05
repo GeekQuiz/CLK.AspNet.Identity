@@ -1,19 +1,48 @@
-﻿using CLK.AspNet.Identity;
-using CLK.AspNet.Identity.EntityFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Data.Common;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 
 namespace CLK.AspNet.Identity.WinConsole
 {
+    // Context
+    public partial class ApplicationDbContext : CLK.AspNet.Identity.EntityFramework.IdentityDbContext<ApplicationUser, ApplicationRole, ApplicationPermission>
+    {
+        // Constructors
+        public ApplicationDbContext() : base("DefaultConnection") { }
+
+        public ApplicationDbContext(string nameOrConnectionString) : base(nameOrConnectionString) { }
+    }
+
+
+    // Manager
+    public partial class ApplicationUserManager : CLK.AspNet.Identity.EntityFramework.UserManager<ApplicationUser, ApplicationRole>
+    {
+        // Constuctors
+        public ApplicationUserManager(ApplicationDbContext context) : base(context) { }
+    }
+
+    public partial class ApplicationRoleManager : CLK.AspNet.Identity.EntityFramework.RoleManager<ApplicationRole>
+    {
+        // Constuctors
+        public ApplicationRoleManager(ApplicationDbContext context) : base(context) { }
+    }
+
+    public partial class ApplicationPermissionManager : CLK.AspNet.Identity.EntityFramework.PermissionManager<ApplicationRole, ApplicationPermission>
+    {
+        // Constuctors
+        public ApplicationPermissionManager(ApplicationDbContext context) : base(context) { }
+    }
+
+    public partial class ApplicationSignInManager : SignInManager<ApplicationUser, string>
+    {
+        // Constuctors
+        public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager) : base(userManager, authenticationManager) { }
+    }
+
+
     // Identity
-    public class ApplicationUser : CLK.AspNet.Identity.EntityFramework.IdentityUser
+    public partial class ApplicationUser : CLK.AspNet.Identity.EntityFramework.IdentityUser
     {
         // Constructors
         public ApplicationUser() : base() { }
@@ -21,7 +50,7 @@ namespace CLK.AspNet.Identity.WinConsole
         public ApplicationUser(string name) : base(name) { }
     }
 
-    public class ApplicationRole : CLK.AspNet.Identity.EntityFramework.IdentityRole
+    public partial class ApplicationRole : CLK.AspNet.Identity.EntityFramework.IdentityRole
     {
         // Constructors
         public ApplicationRole() : base() { }
@@ -29,11 +58,19 @@ namespace CLK.AspNet.Identity.WinConsole
         public ApplicationRole(string name) : base(name) { }
     }
 
-    public class ApplicationPermission : CLK.AspNet.Identity.EntityFramework.IdentityPermission
+    public partial class ApplicationPermission : CLK.AspNet.Identity.EntityFramework.IdentityPermission
     {
         // Constructors
         public ApplicationPermission() : base() { }
 
         public ApplicationPermission(string name) : base(name) { }
+    }
+
+
+    // Authorize
+    public partial class ApplicationPermissionAuthorize : CLK.AspNet.Identity.EntityFramework.PermissionAuthorize<ApplicationRole, ApplicationPermission>
+    {
+        // Constructors
+        public ApplicationPermissionAuthorize(ApplicationPermissionManager permissionManager) : base(permissionManager) { }
     }
 }

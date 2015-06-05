@@ -63,7 +63,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Internals\TaskExtensions.cs" />
-    <Compile Include="RBACAuthorize.cs" />
+    <Compile Include="PermissionAuthorize.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

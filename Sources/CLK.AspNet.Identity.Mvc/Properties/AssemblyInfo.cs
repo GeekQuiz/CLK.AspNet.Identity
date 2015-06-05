@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("CLK.AspNet.Identity.WinConsole")]
+[assembly: AssemblyTitle("CLK.AspNet.Identity.Mvc")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CLK.AspNet.Identity.WinConsole")]
+[assembly: AssemblyProduct("CLK.AspNet.Identity.Mvc")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-[assembly: Guid("bb994ec1-4d67-4e79-914e-212185b5ca4d")]
+[assembly: Guid("8f37d460-38a3-4076-904d-0ce630bac2fc")]
 
 // 組件的版本資訊是由下列四項值構成: 
 //
