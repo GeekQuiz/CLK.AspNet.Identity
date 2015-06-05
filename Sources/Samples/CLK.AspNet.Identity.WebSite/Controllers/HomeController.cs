@@ -13,6 +13,7 @@ namespace CLK.AspNet.Identity.WebSite.Controllers
             return View();
         }
 
+        [RBACAuthorize(Permission = "About")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -20,6 +21,7 @@ namespace CLK.AspNet.Identity.WebSite.Controllers
             return View();
         }
 
+        [RBACAuthorize(Permission = "Contact")]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

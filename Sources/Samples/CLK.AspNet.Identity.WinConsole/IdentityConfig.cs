@@ -3,14 +3,23 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace CLK.AspNet.Identity.WinConsole
 {
     // Context
     public partial class ApplicationDbContext
     {
+        // Constructors
+        static ApplicationDbContext()
+        {
+            //Database.SetInitializer<ApplicationDbContext>(new ApplicationDbInitializer());
+        }
+
+
         // Methods
         public static ApplicationDbContext Create()
         {
@@ -18,9 +27,101 @@ namespace CLK.AspNet.Identity.WinConsole
         }
     }
 
+    public class ApplicationDbInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
+    {
+        // Methods
+        protected override void Seed(ApplicationDbContext context)
+        {
+            // Initialize
+            this.InitializeIdentity(context);
+
+            // Base
+            base.Seed(context);
+        }
+
+        private void InitializeIdentity(ApplicationDbContext context)
+        {
+            #region Contracts
+
+            if (context == null) throw new ArgumentNullException();
+
+            #endregion
+
+            // Default - User
+            const string adminUserName = "admin@hotmail.com";
+            const string adminUserPassword = "admin";
+
+            // Default - Role
+            const string adminRoleName = "Admin";
+
+            // Default - Permission
+            const string aboutPermissionName = "About";
+            const string contactPermissionName = "Contact";
+
+
+            // Manager
+            var userManager = HttpContext.Current.GetOwinContext().Get<ApplicationUserManager>();
+            var roleManager = HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
+            var permissionManager = HttpContext.Current.GetOwinContext().Get<ApplicationPermissionManager>();
+
+            // User
+            var user = userManager.FindByName(adminUserName);
+            if (user == null)
+            {
+                user = new ApplicationUser { UserName = adminUserName, Email = adminUserName };
+                userManager.Create(user, adminUserPassword);
+                userManager.SetLockoutEnabled(user.Id, false);
+            }
+
+            // Role
+            var role = roleManager.FindByName(adminRoleName);
+            if (role == null)
+            {
+                role = new ApplicationRole(adminRoleName);
+                roleManager.Create(role);
+            }
+
+            // Permission
+            var aboutPermission = permissionManager.FindByName(aboutPermissionName);
+            if (aboutPermission == null)
+            {
+                aboutPermission = new ApplicationPermission(aboutPermissionName);
+                permissionManager.Create(aboutPermission);
+            }
+
+            var contactPermission = permissionManager.FindByName(contactPermissionName);
+            if (contactPermission == null)
+            {
+                contactPermission = new ApplicationPermission(contactPermissionName);
+                permissionManager.Create(contactPermission);
+            }
+
+
+            // UserAddToRole 
+            var rolesForUser = userManager.GetRoles(user.Id);
+            if (rolesForUser.Contains(role.Name) == false)
+            {
+                userManager.AddToRole(user.Id, role.Name);
+            }
+
+            // PermissionAddToRole 
+            var rolesForAboutPermission = permissionManager.GetRolesById(aboutPermission.Id);
+            if (rolesForAboutPermission.Contains(role.Name) == false)
+            {
+                permissionManager.AddToRole(aboutPermission.Id, role.Name);
+            }
+
+            var rolesForContactPermission = permissionManager.GetRolesById(contactPermission.Id);
+            if (rolesForContactPermission.Contains(role.Name) == false)
+            {
+                permissionManager.AddToRole(contactPermission.Id, role.Name);
+            }
+        }
+    }
+
 
     // Manager
-    public partial class ApplicationUserManager 
+    public partial class ApplicationUserManager
     {
         // Methods
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
@@ -35,7 +136,7 @@ namespace CLK.AspNet.Identity.WinConsole
             // 建立使用者管理員
             var userManager = new ApplicationUserManager(context.Get<ApplicationDbContext>());
             if (userManager == null) throw new InvalidOperationException();
-            
+
             // 設定使用者名稱的驗證邏輯
             userManager.UserValidator = new UserValidator<ApplicationUser>(userManager)
             {
@@ -52,7 +153,7 @@ namespace CLK.AspNet.Identity.WinConsole
                 RequireLowercase = false,        // 是否需要一個小寫字母
                 RequireUppercase = false,        // 是否需要一個大寫字母
             };
-            
+
             // 設定使用者鎖定詳細資料
             userManager.UserLockoutEnabledByDefault = true;
             userManager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
@@ -82,7 +183,7 @@ namespace CLK.AspNet.Identity.WinConsole
         }
     }
 
-    public partial class ApplicationRoleManager 
+    public partial class ApplicationRoleManager
     {
         // Methods
         public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
@@ -91,7 +192,7 @@ namespace CLK.AspNet.Identity.WinConsole
         }
     }
 
-    public partial class ApplicationPermissionManager 
+    public partial class ApplicationPermissionManager
     {
         // Methods
         public static ApplicationPermissionManager Create(IdentityFactoryOptions<ApplicationPermissionManager> options, IOwinContext context)
@@ -116,7 +217,7 @@ namespace CLK.AspNet.Identity.WinConsole
 
 
     // Identity
-    public partial class ApplicationUser 
+    public partial class ApplicationUser
     {
         // Methods
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(ApplicationUserManager manager)
@@ -128,13 +229,13 @@ namespace CLK.AspNet.Identity.WinConsole
         }
     }
 
-    public partial class ApplicationRole 
+    public partial class ApplicationRole
     {
         // Methods
 
     }
 
-    public partial class ApplicationPermission 
+    public partial class ApplicationPermission
     {
         // Methods
 
