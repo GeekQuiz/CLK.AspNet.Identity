@@ -44,7 +44,6 @@
   <ItemGroup>
     <Compile Include="Extensions\RoleManagerExtensions.cs" />
     <Compile Include="Extensions\UserManagerExtensions.cs" />
-    <Compile Include="AuthorizeContext.cs" />
     <Compile Include="Internals\AsyncHelper.cs" />
     <Compile Include="Extensions\PermissionManagerExtensions.cs" />
     <Compile Include="IPermission.cs">

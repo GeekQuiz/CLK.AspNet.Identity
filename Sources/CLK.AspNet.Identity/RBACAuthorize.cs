@@ -38,7 +38,7 @@ namespace CLK.AspNet.Identity
 
 
         // Constructors
-        internal RBACAuthorize(Func<PermissionManager<TPermission, TKey>> getPermissionManagerDelegate)
+        public RBACAuthorize(Func<PermissionManager<TPermission, TKey>> getPermissionManagerDelegate)
         {
             #region Contracts
 
