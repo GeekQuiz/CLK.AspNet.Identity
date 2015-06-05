@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace CLK.AspNet.Identity.WinConsole
+namespace CLK.AspNet.Identity.WebSite
 {
     // Context
     public partial class ApplicationDbContext
