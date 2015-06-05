@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 namespace CLK.AspNet.Identity.EntityFramework
 {
     public class PermissionManager<TRole, TPermission> : CLK.AspNet.Identity.PermissionManager<TPermission, string>
-        where TRole : IdentityRole, new()
-        where TPermission : IdentityPermission, new()
+        where TRole : CLK.AspNet.Identity.EntityFramework.IdentityRole, new()
+        where TPermission : CLK.AspNet.Identity.EntityFramework.IdentityPermission, new()
     {
         // Constructors
         public PermissionManager(DbContext context) : base(new CLK.AspNet.Identity.EntityFramework.PermissionStore<TRole, TPermission>(context)) { }

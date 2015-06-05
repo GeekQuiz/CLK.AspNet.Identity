@@ -17,9 +17,9 @@ using System.Linq;
 namespace CLK.AspNet.Identity.EntityFramework
 {
     public class IdentityDbContext<TUser, TRole, TPermission> : Microsoft.AspNet.Identity.EntityFramework.IdentityDbContext<TUser, TRole, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>
-        where TUser : IdentityUser
-        where TRole : IdentityRole
-        where TPermission : IdentityPermission
+        where TUser : CLK.AspNet.Identity.EntityFramework.IdentityUser, new()
+        where TRole : CLK.AspNet.Identity.EntityFramework.IdentityRole, new()
+        where TPermission : CLK.AspNet.Identity.EntityFramework.IdentityPermission, new()
     {
         // Constructors
         public IdentityDbContext() : base("DefaultConnection") { }

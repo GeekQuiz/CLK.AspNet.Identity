@@ -30,7 +30,7 @@ namespace CLK.AspNet.Identity
     }
 
     public sealed class RBACAuthorize<TPermission, TKey> : RBACAuthorize
-        where TPermission : class, IPermission<TKey>
+        where TPermission : class, CLK.AspNet.Identity.IPermission<TKey>
         where TKey : IEquatable<TKey>
     {
         // Fields

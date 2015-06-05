@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace CLK.AspNet.Identity.EntityFramework
 {
     public abstract class IdentityAuthorizeContext<TUser, TRole, TPermission> : CLK.AspNet.Identity.AuthorizeContext<TUser, TRole, TPermission, string>
-        where TUser : IdentityUser, new()
-        where TRole : IdentityRole, new()
-        where TPermission : IdentityPermission, new()
+        where TUser : CLK.AspNet.Identity.EntityFramework.IdentityUser, new()
+        where TRole : CLK.AspNet.Identity.EntityFramework.IdentityRole, new()
+        where TPermission : CLK.AspNet.Identity.EntityFramework.IdentityPermission, new()
     {
         // Constructors
         public IdentityAuthorizeContext() : base() { }

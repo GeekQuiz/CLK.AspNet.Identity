@@ -15,6 +15,22 @@ namespace CLK.AspNet.Identity.WinConsole
         public ApplicationDbContext(string nameOrConnectionString) : base(nameOrConnectionString) { }
     }
 
+    public class ApplicationAuthorizeContext : CLK.AspNet.Identity.EntityFramework.IdentityAuthorizeContext<ApplicationUser, ApplicationRole, ApplicationPermission>
+    {
+        // Constructors
+        public ApplicationAuthorizeContext() : base() { }
+
+
+        // Methods
+        protected override PermissionManager<ApplicationPermission, string> PermissionManager
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+    }
+
 
     // Manager
     public class ApplicationUserManager : CLK.AspNet.Identity.EntityFramework.UserManager<ApplicationUser, ApplicationRole>
