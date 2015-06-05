@@ -21,6 +21,25 @@ namespace CLK.AspNet.Identity.Mvc
 
 
         // Methods
+        protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
+        {
+            #region Contracts
+
+            if (filterContext == null) throw new ArgumentNullException();
+
+            #endregion
+
+            // HttpStatus - 403 Forbidden
+            if (filterContext.HttpContext.User.Identity.IsAuthenticated == true)
+            {
+                filterContext.Result = new HttpStatusCodeResult(403);
+                return;
+            }
+
+            // Base
+            base.HandleUnauthorizedRequest(filterContext);            
+        }
+
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             #region Contracts
