@@ -12,6 +12,14 @@ namespace CLK.AspNet.Identity.WebSite.Models
         public string Name { get; set; }
     }
 
+    public class PermissionViewModel
+    {
+        public string Id { get; set; }
+        [Required(AllowEmptyStrings = false)]
+        [Display(Name = "PermissionName")]
+        public string Name { get; set; }
+    }
+
     public class EditUserViewModel
     {
         public string Id { get; set; }
@@ -20,6 +28,17 @@ namespace CLK.AspNet.Identity.WebSite.Models
         [Display(Name = "Email")]
         [EmailAddress]
         public string Email { get; set; }
+
+        public IEnumerable<SelectListItem> RolesList { get; set; }
+    }
+
+    public class EditPermissionViewModel
+    {
+        public string Id { get; set; }
+
+        [Required(AllowEmptyStrings = false)]
+        [Display(Name = "PermissionName")]
+        public string Name { get; set; }
 
         public IEnumerable<SelectListItem> RolesList { get; set; }
     }

@@ -59,8 +59,8 @@ namespace CLK.AspNet.Identity.WebSite.Models
             const string guestRoleName = "Guest";
 
             // Default - Permission
-            const string aboutPermissionName = "About";
-            const string contactPermissionName = "Contact";
+            const string aboutPermissionName = "AboutAccess";
+            const string contactPermissionName = "ContactAccess";
 
 
             // Manager
