@@ -19,10 +19,11 @@ namespace CLK.AspNet.Identity.WebSite.Controllers
         {
         }
 
-        public RolesAdminController(ApplicationUserManager userManager, ApplicationRoleManager roleManager)
+        public RolesAdminController(ApplicationUserManager userManager, ApplicationRoleManager roleManager, ApplicationPermissionManager permissionManager)
         {
-            UserManager = userManager;
-            RoleManager = roleManager;
+            this.UserManager = userManager;
+            this.RoleManager = roleManager;
+            this.PermissionManager = permissionManager;
         }
 
 

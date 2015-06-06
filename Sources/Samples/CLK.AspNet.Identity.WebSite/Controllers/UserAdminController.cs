@@ -15,16 +15,20 @@ namespace CLK.AspNet.Identity.WebSite.Controllers
     [RBACAuthorize(Roles = "Admin")]
     public class UsersAdminController : Controller
     {
+        // Constructors
         public UsersAdminController()
         {
         }
 
-        public UsersAdminController(ApplicationUserManager userManager, ApplicationRoleManager roleManager)
+        public UsersAdminController(ApplicationUserManager userManager, ApplicationRoleManager roleManager, ApplicationPermissionManager permissionManager)
         {
-            UserManager = userManager;
-            RoleManager = roleManager;
+            this.UserManager = userManager;
+            this.RoleManager = roleManager;
+            this.PermissionManager = permissionManager;
         }
 
+
+        // Properties
         private ApplicationUserManager _userManager;
         public ApplicationUserManager UserManager
         {
@@ -32,7 +36,7 @@ namespace CLK.AspNet.Identity.WebSite.Controllers
             {
                 return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
-            private set
+            set
             {
                 _userManager = value;
             }
@@ -50,6 +54,20 @@ namespace CLK.AspNet.Identity.WebSite.Controllers
                 _roleManager = value;
             }
         }
+
+        private ApplicationPermissionManager _permissionManager;
+        public ApplicationPermissionManager PermissionManager
+        {
+            get
+            {
+                return _permissionManager ?? HttpContext.GetOwinContext().Get<ApplicationPermissionManager>();
+            }
+            private set
+            {
+                _permissionManager = value;
+            }
+        }
+
 
         //
         // GET: /Users/
