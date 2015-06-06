@@ -8,7 +8,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace CLK.AspNet.Identity.WebSite
+namespace CLK.AspNet.Identity.WebSite.Models
 {
     // Context
     public partial class ApplicationDbContext
@@ -48,10 +48,10 @@ namespace CLK.AspNet.Identity.WebSite
             #endregion
 
             // Default - User
-            const string adminUserName = "admin@hotmail.com";
+            const string adminUserName = "admin@example.com";
             const string adminUserPassword = "admin";
 
-            const string guestUserName = "guest@hotmail.com";
+            const string guestUserName = "guest@example.com";
             const string guestUserPassword = "guest";
 
             // Default - Role

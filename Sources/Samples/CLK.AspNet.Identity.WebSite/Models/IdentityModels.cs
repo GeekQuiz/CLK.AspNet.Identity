@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 
-namespace CLK.AspNet.Identity.WebSite
+namespace CLK.AspNet.Identity.WebSite.Models
 {
     // Context
     public partial class ApplicationDbContext : CLK.AspNet.Identity.EntityFramework.IdentityDbContext<ApplicationUser, ApplicationRole, ApplicationPermission>

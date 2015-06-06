@@ -25,6 +25,11 @@
                     <li>@Html.ActionLink("首頁", "Index", "Home")</li>
                     <li>@Html.ActionLink("關於", "About", "Home")</li>
                     <li>@Html.ActionLink("連絡方式", "Contact", "Home")</li>
+                    @if (Request.IsAuthenticated == true) {
+                        <li>@Html.ActionLink("人員管理", "Index", "UsersAdmin")</li>
+                        <li>@Html.ActionLink("角色管理", "Index", "RolesAdmin")</li>
+                        <li>@Html.ActionLink("權限管理", "Index", "PermissionsAdmin")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
