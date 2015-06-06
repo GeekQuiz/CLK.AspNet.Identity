@@ -51,8 +51,12 @@ namespace CLK.AspNet.Identity.WebSite
             const string adminUserName = "admin@hotmail.com";
             const string adminUserPassword = "admin";
 
+            const string guestUserName = "guest@hotmail.com";
+            const string guestUserPassword = "guest";
+
             // Default - Role
             const string adminRoleName = "Admin";
+            const string guestRoleName = "Guest";
 
             // Default - Permission
             const string aboutPermissionName = "About";
@@ -64,21 +68,37 @@ namespace CLK.AspNet.Identity.WebSite
             var roleManager = HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
             var permissionManager = HttpContext.Current.GetOwinContext().Get<ApplicationPermissionManager>();
 
+
             // User
-            var user = userManager.FindByName(adminUserName);
-            if (user == null)
+            var adminUser = userManager.FindByName(adminUserName);
+            if (adminUser == null)
             {
-                user = new ApplicationUser { UserName = adminUserName, Email = adminUserName };
-                userManager.Create(user, adminUserPassword);
-                userManager.SetLockoutEnabled(user.Id, false);
+                adminUser = new ApplicationUser { UserName = adminUserName, Email = adminUserName };
+                userManager.Create(adminUser, adminUserPassword);
+                userManager.SetLockoutEnabled(adminUser.Id, false);
+            }
+
+            var guestUser = userManager.FindByName(guestUserName);
+            if (guestUser == null)
+            {
+                guestUser = new ApplicationUser { UserName = guestUserName, Email = guestUserName };
+                userManager.Create(guestUser, guestUserPassword);
+                userManager.SetLockoutEnabled(guestUser.Id, false);
             }
 
             // Role
-            var role = roleManager.FindByName(adminRoleName);
-            if (role == null)
+            var adminRole = roleManager.FindByName(adminRoleName);
+            if (adminRole == null)
             {
-                role = new ApplicationRole(adminRoleName);
-                roleManager.Create(role);
+                adminRole = new ApplicationRole(adminRoleName);
+                roleManager.Create(adminRole);
+            }
+
+            var guestRole = roleManager.FindByName(guestRoleName);
+            if (guestRole == null)
+            {
+                guestRole = new ApplicationRole(guestRoleName);
+                roleManager.Create(guestRole);
             }
 
             // Permission
@@ -98,23 +118,34 @@ namespace CLK.AspNet.Identity.WebSite
 
 
             // UserAddToRole 
-            var rolesForUser = userManager.GetRoles(user.Id);
-            if (rolesForUser.Contains(role.Name)==false)
+            IList<string> rolesForUser = null;
+
+            rolesForUser = userManager.GetRoles(adminUser.Id);
+            if (rolesForUser.Contains(adminRole.Name)==false)
             {
-                userManager.AddToRole(user.Id, role.Name);
+                userManager.AddToRole(adminUser.Id, adminRole.Name);
             }
+
+            rolesForUser = userManager.GetRoles(guestUser.Id);
+            if (rolesForUser.Contains(guestRole.Name) == false)
+            {
+                userManager.AddToRole(guestUser.Id, guestRole.Name);
+            }
+
 
             // PermissionAddToRole 
-            var rolesForAboutPermission = permissionManager.GetRolesById(aboutPermission.Id);
-            if (rolesForAboutPermission.Contains(role.Name) == false)
+            IList<string> rolesForPermission = null;
+
+            rolesForPermission = permissionManager.GetRolesById(aboutPermission.Id);
+            if (rolesForPermission.Contains(adminRole.Name) == false)
             {
-                permissionManager.AddToRole(aboutPermission.Id, role.Name);
+                permissionManager.AddToRole(aboutPermission.Id, adminRole.Name);
             }
 
-            var rolesForContactPermission = permissionManager.GetRolesById(contactPermission.Id);
-            if (rolesForContactPermission.Contains(role.Name) == false)
+            rolesForPermission = permissionManager.GetRolesById(contactPermission.Id);
+            if (rolesForPermission.Contains(adminRole.Name) == false)
             {
-                permissionManager.AddToRole(contactPermission.Id, role.Name);
+                permissionManager.AddToRole(contactPermission.Id, adminRole.Name);
             }
         }
     }
