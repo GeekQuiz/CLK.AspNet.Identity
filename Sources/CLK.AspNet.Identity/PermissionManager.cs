@@ -338,6 +338,29 @@ namespace CLK.AspNet.Identity
             return await UpdateAsync(permission).WithCurrentCulture();
         }
 
+        public virtual async Task<bool> HasPermissionAsync(TKey permissionId, string roleName)
+        {
+            #region Contracts
+
+            if (string.IsNullOrEmpty(roleName) == true) throw new ArgumentNullException("roleName");
+
+            #endregion
+
+            // Require
+            this.ThrowIfDisposed();
+
+            // PermissionRoleStore
+            var permissionRoleStore = this.Store as IPermissionRoleStore<TPermission, TKey>;
+            if (permissionRoleStore == null) throw new NotSupportedException(Resources.StoreNotIPermissionRoleStore);
+
+            // Permission
+            var permission = await this.FindByIdAsync(permissionId).WithCurrentCulture();
+            if (permission == null) throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, Resources.PermissionIdNotFound, permissionId));
+
+            // HasPermission
+            return await permissionRoleStore.HasPermissionAsync(permission, roleName).WithCurrentCulture();
+        }
+
         public virtual async Task<IList<string>> GetRolesByIdAsync(TKey permissionId)
         {
             // Require

@@ -249,6 +249,26 @@ namespace CLK.AspNet.Identity.EntityFramework
             _permissionRoles.Remove(permissionRole);
         }
 
+        public virtual async Task<bool> HasPermissionAsync(TPermission permission, string roleName)
+        {
+            #region Contracts
+
+            if (permission == null) throw new ArgumentNullException("permission");
+            if (string.IsNullOrEmpty(roleName) == true) throw new ArgumentNullException("roleName");
+
+            #endregion
+
+            // Require
+            this.ThrowIfDisposed();
+
+            // RoleEntity
+            var roleEntity = await _roleStore.DbEntitySet.SingleOrDefaultAsync(r => r.Name.ToUpper() == roleName.ToUpper()).WithCurrentCulture();
+            if (roleEntity == null) throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, IdentityResources.RoleNotFound, roleName));
+
+            // HasPermission
+            return await _permissionRoles.AnyAsync(pr => pr.RoleId.Equals(roleEntity.Id) && pr.PermissionId.Equals(permission.Id)).WithCurrentCulture();
+        }
+
         public virtual async Task<IList<string>> GetRolesAsync(TPermission permission)
         {
             #region Contracts
@@ -260,7 +280,7 @@ namespace CLK.AspNet.Identity.EntityFramework
             // Require
             this.ThrowIfDisposed();
 
-            // Query
+            // GetRoles
             var query = from permissionRole in _permissionRoles
                         where permissionRole.PermissionId.Equals(permission.Id)
                         join role in _roleStore.DbEntitySet on permissionRole.RoleId equals role.Id

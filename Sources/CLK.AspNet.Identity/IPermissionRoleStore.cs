@@ -12,6 +12,8 @@ namespace CLK.AspNet.Identity
 
         Task RemoveFromRoleAsync(TPermission permission, string roleName);
 
+        Task<bool> HasPermissionAsync(TPermission permission, string roleName);
+
         Task<IList<string>> GetRolesAsync(TPermission permission);
     }
 }

@@ -7,23 +7,26 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using System;
 
 namespace CLK.AspNet.Identity.WebSite.Controllers
 {
     [RBACAuthorize(Roles = "Admin")]
     public class RolesAdminController : Controller
     {
+        // Constructors
         public RolesAdminController()
         {
         }
 
-        public RolesAdminController(ApplicationUserManager userManager,
-            ApplicationRoleManager roleManager)
+        public RolesAdminController(ApplicationUserManager userManager, ApplicationRoleManager roleManager)
         {
             UserManager = userManager;
             RoleManager = roleManager;
         }
 
+
+        // Properties
         private ApplicationUserManager _userManager;
         public ApplicationUserManager UserManager
         {
@@ -50,6 +53,20 @@ namespace CLK.AspNet.Identity.WebSite.Controllers
             }
         }
 
+        private ApplicationPermissionManager _permissionManager;
+        public ApplicationPermissionManager PermissionManager
+        {
+            get
+            {
+                return _permissionManager ?? HttpContext.GetOwinContext().Get<ApplicationPermissionManager>();
+            }
+            private set
+            {
+                _permissionManager = value;
+            }
+        }
+
+        
         //
         // GET: /Roles/
         public ActionResult Index()
@@ -61,25 +78,41 @@ namespace CLK.AspNet.Identity.WebSite.Controllers
         // GET: /Roles/Details/5
         public async Task<ActionResult> Details(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var role = await RoleManager.FindByIdAsync(id);
-            // Get the list of Users in this Role
-            var users = new List<ApplicationUser>();
+            #region Contracts
 
-            // Get the list of Users in this Role
-            foreach (var user in UserManager.Users.ToList())
+            if (string.IsNullOrEmpty(id) == true) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            #endregion
+
+            // Role
+            var role = await RoleManager.FindByIdAsync(id);
+            if (role == null) throw new InvalidOperationException();
+
+            // User
+            var users = new List<ApplicationUser>();
+            foreach (var user in this.UserManager.Users.ToList())
             {
-                if (await UserManager.IsInRoleAsync(user.Id, role.Name))
+                if (await this.UserManager.IsInRoleAsync(user.Id, role.Name))
                 {
                     users.Add(user);
                 }
             }
-
             ViewBag.Users = users;
             ViewBag.UserCount = users.Count();
+
+            // Permission
+            var permissions = new List<ApplicationPermission>();
+            foreach (var permission in this.PermissionManager.Permissions.ToList())
+            {
+                if (await this.PermissionManager.HasPermissionAsync(permission.Id, role.Name) == true)
+                {
+                    permissions.Add(permission);
+                }
+            }
+            ViewBag.Permissions = permissions;
+            ViewBag.PermissionCount = permissions.Count();
+            
+            // Return
             return View(role);
         }
 
