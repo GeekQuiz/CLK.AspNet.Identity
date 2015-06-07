@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNet.Identity.Owin;
-using CLK.AspNet.Identity.WebSite.Models;
+﻿using CLK.AspNet.Identity.WebSite.Models;
+using CLK.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Web;
 

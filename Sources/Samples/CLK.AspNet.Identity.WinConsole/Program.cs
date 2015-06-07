@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using CLK.AspNet.Identity;
+using Microsoft.AspNet.Identity;
 
 namespace CLK.AspNet.Identity.WinConsole
 {
