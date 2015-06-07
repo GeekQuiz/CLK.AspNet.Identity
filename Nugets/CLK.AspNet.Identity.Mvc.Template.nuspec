@@ -67,5 +67,17 @@
         </dependencies>
     </metadata>
     <files>
+        <file src="CLK.AspNet.Identity.Mvc.Template\*.*"                        target="content" />
+        <file src="CLK.AspNet.Identity.Mvc.Template\App_Start\*.*"              target="content\App_Start" />
+        <file src="CLK.AspNet.Identity.Mvc.Template\Controllers\*.*"            target="content\Controllers" />
+        <file src="CLK.AspNet.Identity.Mvc.Template\Models\*.*"                 target="content\Models" />
+        <file src="CLK.AspNet.Identity.Mvc.Template\Views\*.*"                  target="content\Views" />
+        <file src="CLK.AspNet.Identity.Mvc.Template\Views\Account\*.*"          target="content\Views\Account" />
+        <file src="CLK.AspNet.Identity.Mvc.Template\Views\Home\*.*"             target="content\Views\Home" />
+        <file src="CLK.AspNet.Identity.Mvc.Template\Views\Manage\*.*"           target="content\Views\Manage" />
+        <file src="CLK.AspNet.Identity.Mvc.Template\Views\PermissionsAdmin\*.*" target="content\Views\PermissionsAdmin" />
+        <file src="CLK.AspNet.Identity.Mvc.Template\Views\RolesAdmin\*.*"       target="content\Views\RolesAdmin" />
+        <file src="CLK.AspNet.Identity.Mvc.Template\Views\Shared\*.*"           target="content\Views\Shared" />
+        <file src="CLK.AspNet.Identity.Mvc.Template\Views\UsersAdmin\*.*"       target="content\Views\UsersAdmin" />
     </files>
 </package>
