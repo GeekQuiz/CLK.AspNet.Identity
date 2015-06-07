@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
-        <id>CLK.AspNet.Identity.Mvc.Templates</id>
+        <id>CLK.AspNet.Identity.Mvc.Template</id>
         <version>0.0.0</version>
-        <title>CLK.AspNet.Identity.Mvc Templates</title>
+        <title>CLK.AspNet.Identity.Mvc Template</title>
         <authors>Clark</authors>
         <owners>Clark</owners>
         <requireLicenseAcceptance>true</requireLicenseAcceptance>
         <licenseUrl>https://github.com/Clark159/CLK.AspNet.Identity/blob/master/LICENSE</licenseUrl>
-        <description>CLK.AspNet.Identity.Mvc Templates</description>
+        <description>CLK.AspNet.Identity.Mvc Template</description>
         <copyright>Copyright © 2015 CLK Software Studio</copyright>
         <dependencies>
             <group targetFramework=".NETFramework4.5">
