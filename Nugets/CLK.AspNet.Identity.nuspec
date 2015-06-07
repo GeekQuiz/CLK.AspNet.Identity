@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>CLK.AspNet.Identity</id>
+        <version>0.0.0</version>
+        <title>CLK.AspNet.Identity</title>
+        <authors>Clark</authors>
+        <owners>Clark</owners>
+        <requireLicenseAcceptance>true</requireLicenseAcceptance>
+        <licenseUrl>https://github.com/Clark159/CLK.AspNet.Identity/blob/master/LICENSE</licenseUrl>
+        <description>CLK.AspNet.Identity</description>
+        <copyright>Copyright © 2015 CLK Software Studio</copyright>
+        <dependencies>
+            <group targetFramework=".NETFramework4.5">
+                <dependency id="Microsoft.AspNet.Identity.Core" version="2.2.1" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="..\Sources\CLK.AspNet.Identity\bin\Release\CLK.AspNet.Identity.dll" target="lib\net45" />
+    </files>
+</package>
