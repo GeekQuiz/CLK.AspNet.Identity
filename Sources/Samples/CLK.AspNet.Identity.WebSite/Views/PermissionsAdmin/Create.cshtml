@@ -33,6 +33,7 @@
                 {
                     <input type="checkbox" name="SelectedRoles" value="@item.Value" class="checkbox-inline" />
                     @Html.Label(item.Value, new { @class = "control-label" })
+                    <br />
                 }
             </div>
         </div>
