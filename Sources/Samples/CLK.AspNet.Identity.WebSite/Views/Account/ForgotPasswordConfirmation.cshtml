@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "忘記密碼確認";
+    ViewBag.Title = "Forgot Password Confirmation";
 }
 
 <hgroup class="title">
@@ -7,7 +7,11 @@
 </hgroup>
 <div>
     <p>
-        請檢查電子郵件以重設密碼。
+        Please check your email to reset your password.
+    </p>
+    <p class="text-danger">
+        For DEMO only: You can click this link to reset password: <a href="@ViewBag.Link">link</a>
+        Please change this code to register an email service in IdentityConfig to send an email.
     </p>
 </div>
-	
+
