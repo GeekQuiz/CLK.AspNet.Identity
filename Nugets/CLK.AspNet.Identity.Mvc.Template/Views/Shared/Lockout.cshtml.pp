@@ -1,10 +1,10 @@
 ﻿@model System.Web.Mvc.HandleErrorInfo
 
 @{
-    ViewBag.Title = "已鎖定";
+    ViewBag.Title = "Locked Out";
 }
 
 <hgroup>
-    <h1 class="text-danger">已鎖定。</h1>
-    <h2 class="text-danger">此帳戶已遭鎖定，請稍後再試一次。</h2>
+    <h1 class="text-error">Locked out.</h1>
+    <h2 class="text-error">This account has been locked out, please try again later.</h2>
 </hgroup>

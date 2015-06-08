@@ -1,17 +1,16 @@
-﻿@using $rootnamespace$.Models
-@model LoginViewModel
+﻿@model $rootnamespace$.Models.LoginViewModel
+
 @{
-    ViewBag.Title = "登入";
+    ViewBag.Title = "Log in";
 }
 
 <h2>@ViewBag.Title.</h2>
 <div class="row">
     <div class="col-md-8">
         <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
                 @Html.AntiForgeryToken()
-                <h4>使用本機帳戶登入。</h4>
+                <h4>Use a local account to log in.</h4>
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
@@ -38,26 +37,24 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="登入" class="btn btn-default" />
+                        <input type="submit" value="Log in" class="btn btn-default" />
                     </div>
                 </div>
                 <p>
-                    @Html.ActionLink("註冊為新使用者", "Register")
+                    @Html.ActionLink("Register a new user?", "Register")
                 </p>
-                @* 請在啟用密碼重設功能的帳戶確認之後啟用此項目
-                    <p>
-                        @Html.ActionLink("忘記密碼?", "ForgotPassword")
-                    </p>*@
+                <p>
+                    @Html.ActionLink("Forget your password?", "ForgotPassword")
+                </p>
             }
         </section>
     </div>
     <div class="col-md-4">
         <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            @Html.Partial("_ExternalLoginsListPartial", new $rootnamespace$.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
         </section>
     </div>
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

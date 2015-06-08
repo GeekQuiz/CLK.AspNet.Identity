@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "重設密碼確認";
+    ViewBag.Title = "Reset password confirmation";
 }
 
 <hgroup class="title">
@@ -7,6 +7,6 @@
 </hgroup>
 <div>
     <p>
-        您的密碼已重設。請 @Html.ActionLink("按一下這裡登入", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+        Your password has been reset. Please @Html.ActionLink("click here to log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
     </p>
 </div>
