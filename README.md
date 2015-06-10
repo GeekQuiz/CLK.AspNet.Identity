@@ -24,7 +24,7 @@ ASP.NET Identity授權機制，可以在系統運行中動態變更使用者所�
 
 - 使用者屬於哪個角色
 
-	![前言02](http://Files.Dotblogs.com.tw/clark/1506/2015681723712.png)
+	![前言02](http://Files.Dotblogs.com.tw/clark/1506/2015610103715901.png)
 
 
 本篇文章介紹一個基於ASP.NET Identity開發設計的驗證授權模組：CLK.AspNet.Identity。這個驗證授權模組提供[以角色為基礎的存取控制(Role-based access control, RBAC)](http://en.wikipedia.org/wiki/Role-based_access_control)，將系統授權拆解為User(使用者)、Role(角色)、Permission(權限)。開發人員在系統內套用CLK.AspNet.Identity後，就可以像下列範例一樣定義使用者屬於哪個角色、哪個角色擁有那些權限、權限可以使用哪些功能，後續使用者通過驗證之後，就可以依照角色權限來使用系統功能。
@@ -48,11 +48,11 @@ CLK.AspNet.Identity授權機制，除了可以繼續使用繼承自ASP.NET Ident
 
 - 權限屬於哪個角色
 
-	![前言04](http://Files.Dotblogs.com.tw/clark/1506/20156817319791.png)
+	![前言04](http://Files.Dotblogs.com.tw/clark/1506/2015610103748604.png)
 
 - 使用者屬於哪個角色
 
-	![前言05](http://Files.Dotblogs.com.tw/clark/1506/20156817252278.png)
+	![前言05](http://Files.Dotblogs.com.tw/clark/1506/201561010389416.png)
 
 ##安裝##
 
@@ -83,13 +83,13 @@ CLK.AspNet.Identity授權機制，除了可以繼續使用繼承自ASP.NET Ident
 
 	![變更角色的權限02](http://Files.Dotblogs.com.tw/clark/1506/201568212623575.png)
 
-	![變更角色的權限03](http://Files.Dotblogs.com.tw/clark/1506/201568212547489.png)
+	![變更角色的權限03](http://Files.Dotblogs.com.tw/clark/1506/2015610103959760.png)
 
 2. 使用預設的管理帳號登入(ID:admin@example.com, PW:admin)，點擊頁面選單按鈕：PermissionsAdmin進入權限管理頁面，編輯AboutAccess權限，讓Guest群組擁有AboutAccess權限。
 
 	![變更角色的權限04](http://Files.Dotblogs.com.tw/clark/1506/201568213346453.png)
 
-	![變更角色的權限05](http://Files.Dotblogs.com.tw/clark/1506/201568213421760.png)
+	![變更角色的權限05](http://Files.Dotblogs.com.tw/clark/1506/201561010416901.png)
 
 3. 更換回預設的訪客帳號登入(ID:guest@example.com, PW:guest)，點擊頁面選單按鈕：About，因為現在Guest群組擁有AboutAccess權限，所以可以瀏覽About頁面內容。
 
@@ -104,13 +104,13 @@ CLK.AspNet.Identity授權機制，除了可以繼續使用繼承自ASP.NET Ident
 
 	![變更使用者的角色02](http://Files.Dotblogs.com.tw/clark/1506/201568214514379.png)
 
-	![變更使用者的角色03](http://Files.Dotblogs.com.tw/clark/1506/201568214530583.png)
+	![變更使用者的角色03](http://Files.Dotblogs.com.tw/clark/1506/2015610104129448.png)
 
 2. 使用預設的管理帳號登入(ID:admin@example.com, PW:admin)，點擊頁面選單按鈕：UsersAdmin進入使用者管理頁面，編輯guest@example.com使用者，讓guest@example.com使用者加入到Admin群組。
 
 	![變更使用者的角色04](http://Files.Dotblogs.com.tw/clark/1506/201568214722691.png)
 
-	![變更使用者的角色05](http://Files.Dotblogs.com.tw/clark/1506/201568214758460.png)
+	![變更使用者的角色05](http://Files.Dotblogs.com.tw/clark/1506/2015610104146120.png)
 
 3. 更換回預設的訪客帳號登入(ID:guest@example.com, PW:guest)，點擊頁面選單按鈕：Contact，因為現在guest@example.com屬於Admin群組，而Admin群組擁有ContactAccess權限，所以可以瀏覽Contact頁面內容。
 
@@ -142,17 +142,15 @@ CLK.AspNet.Identity授權機制，除了可以繼續使用繼承自ASP.NET Ident
 
 	![新增系統的權限03](http://Files.Dotblogs.com.tw/clark/1506/20156822632922.png)
 
-	![新增系統的權限04](http://Files.Dotblogs.com.tw/clark/1506/201568221152333.png)
+	![新增系統的權限04](http://Files.Dotblogs.com.tw/clark/1506/2015610103828666.png)
 
 4. 使用預設的管理帳號登入(ID:admin@example.com, PW:admin)，點擊頁面選單按鈕：PermissionsAdmin進入權限管理頁面，新增NewsAccess權限，並且讓Guest群組擁有NewsAccess權限。
 
 	![新增系統的權限05](http://Files.Dotblogs.com.tw/clark/1506/20156822124954.png)
 	
-	![新增系統的權限06](http://Files.Dotblogs.com.tw/clark/1506/201568221439823.png)
+	![新增系統的權限06](http://Files.Dotblogs.com.tw/clark/1506/2015610103922932.png)
 
 5. 更換回預設的訪客帳號登入(ID:guest@example.com, PW:guest)，點擊頁面選單按鈕：News，因為現在Guest群組擁有NewsAccess權限，所以可以瀏覽News頁面內容。
 
 	![新增系統的權限07](http://Files.Dotblogs.com.tw/clark/1506/20156822178726.png)
-
-
 
