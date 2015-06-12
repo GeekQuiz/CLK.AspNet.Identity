@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IdentityDbContext.cs" />
+    <Compile Include="IdentityDbInitializer.cs" />
     <Compile Include="IdentityPermission.cs" />
     <Compile Include="IdentityPermissionRole.cs" />
     <Compile Include="IdentityResources.Designer.cs">

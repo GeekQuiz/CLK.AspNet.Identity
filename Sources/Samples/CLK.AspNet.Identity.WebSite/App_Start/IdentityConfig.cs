@@ -1,4 +1,4 @@
-﻿using CLK.AspNet.Identity;
+﻿using CLK.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -17,7 +17,8 @@ namespace CLK.AspNet.Identity.WebSite.Models
         // Constructors
         static ApplicationDbContext()
         {
-            Database.SetInitializer<ApplicationDbContext>(new ApplicationDbInitializer());
+            // Database
+            Database.SetInitializer(new DropCreateForModelChangesDbInitializer<ApplicationDbContext>(InitializeIdentity));
         }
 
 
@@ -26,21 +27,8 @@ namespace CLK.AspNet.Identity.WebSite.Models
         {
             return new ApplicationDbContext("DefaultConnection");
         }
-    }
 
-    public class ApplicationDbInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
-    {
-        // Methods
-        protected override void Seed(ApplicationDbContext context)
-        {
-            // Initialize
-            this.InitializeIdentity(context);
-
-            // Base
-            base.Seed(context);
-        }
-
-        private void InitializeIdentity(ApplicationDbContext context)
+        public static void InitializeIdentity(ApplicationDbContext context)
         {
             #region Contracts
 
@@ -122,7 +110,7 @@ namespace CLK.AspNet.Identity.WebSite.Models
             IList<string> rolesForUser = null;
 
             rolesForUser = userManager.GetRoles(adminUser.Id);
-            if (rolesForUser.Contains(adminRole.Name)==false)
+            if (rolesForUser.Contains(adminRole.Name) == false)
             {
                 userManager.AddToRole(adminUser.Id, adminRole.Name);
             }
