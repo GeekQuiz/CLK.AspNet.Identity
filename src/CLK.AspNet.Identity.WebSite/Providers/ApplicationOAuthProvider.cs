@@ -96,17 +96,3 @@ namespace CLK.AspNet.Identity.WebSite.Providers
         }
     }
 }
-
-namespace CLK.AspNet.Identity.WebSite.Providers
-{
-    internal static class ApplicationUserExtensions
-    {
-        public static async Task<ClaimsIdentity> GenerateUserIdentityAsync(this ApplicationUser user, ApplicationUserManager manager, string authenticationType)
-        {
-            // 注意 authenticationType 必須符合 CookieAuthenticationOptions.AuthenticationType 中定義的項目
-            var userIdentity = await manager.CreateIdentityAsync(user, authenticationType);
-            // 在這裡新增自訂使用者宣告
-            return userIdentity;
-        }
-    }
-}
