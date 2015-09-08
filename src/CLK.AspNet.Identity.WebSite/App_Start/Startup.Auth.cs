@@ -6,6 +6,8 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using CLK.AspNet.Identity.WebSite.Models;
+using Microsoft.Owin.Security.OAuth;
+using CLK.AspNet.Identity.WebSite.Providers;
 
 namespace CLK.AspNet.Identity.WebSite
 {
@@ -38,6 +40,19 @@ namespace CLK.AspNet.Identity.WebSite
                 }
             });            
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
+
+            // 設定 OAuth 基礎流程的應用程式
+            // 讓應用程式使用 Bearer 權杖驗證使用者
+            var PublicClientId = "self";
+            var OAuthOptions = new OAuthAuthorizationServerOptions
+            {
+                TokenEndpointPath = new PathString("/Token"),
+                Provider = new ApplicationOAuthProvider(PublicClientId),
+                AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),               
+                AllowInsecureHttp = true  // 在生產模式中設定 AllowInsecureHttp = false
+            };            
+            app.UseOAuthBearerTokens(OAuthOptions);
 
             // 讓應用程式在雙因素驗證程序中驗證第二個因素時暫時儲存使用者資訊。
             app.UseTwoFactorSignInCookie(DefaultAuthenticationTypes.TwoFactorCookie, TimeSpan.FromMinutes(5));
