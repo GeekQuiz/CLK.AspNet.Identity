@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CLK.AspNet.Identity.WebSite.Models;
 using Microsoft.Owin.Infrastructure;
+using Microsoft.Owin.Security.OAuth;
 
 namespace CLK.AspNet.Identity.WebSite.Controllers
 {
