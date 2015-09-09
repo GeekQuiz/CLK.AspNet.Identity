@@ -62,6 +62,12 @@ namespace CLK.AspNet.Identity.WebSite.Models
         public bool RememberMe { get; set; }
     }
 
+    public class TokenViewModel
+    {
+        [Required]
+        public string AccessToken { get; set; }
+    }
+
     public class RegisterViewModel
     {
         [Required]

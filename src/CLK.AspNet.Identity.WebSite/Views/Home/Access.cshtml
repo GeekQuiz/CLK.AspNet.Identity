@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Access";
+}
+<hgroup>
+    <h2>@ViewBag.Title.</h2>
+    <h3>@ViewBag.Message</h3>
+</hgroup>
+<div class="row-fluid">
+    <div class="span12">
+        <button class="btn btn-primary btn-large" onclick="getToken()">Get Token</button>
+        <button class="btn btn-primary btn-large" onclick="callWebAPI()">Call WebAPI</button>
+        <h2 id="tokenContent"></h2>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+                
+        function getToken() {
+           
+            var tokenUrl = "/Account/Token";
+            
+            var tokenDialog = window.open(tokenUrl, "_blank", "height=" + screen.height + ", width=" + screen.width);
+                        
+            window.__clk_aspnet_identity_account_tokenCompleted = function (eventArgs) {
+                document.getElementById("tokenContent").innerText = eventArgs.AccessToken;
+            };
+        }
+
+        function callWebAPI() {
+
+            // AccessToken
+            var accessToken = document.getElementById("tokenContent").innerText;
+            if (accessToken == "") { alert("AccessToken is null"); return; }
+
+            // WebAPI
+            var xhr = new XMLHttpRequest();                        
+            xhr.open("get", "/api/values", true);
+            xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
+            xhr.onload = function reqListener() {
+                alert(this.responseText);
+            };
+            xhr.send();
+        }
+    </script>
+}

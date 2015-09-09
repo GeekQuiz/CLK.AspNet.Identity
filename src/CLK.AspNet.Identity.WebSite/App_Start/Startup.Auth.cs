@@ -13,7 +13,13 @@ namespace CLK.AspNet.Identity.WebSite
 {
     public partial class Startup
     {
-        // 如需設定驗證的詳細資訊，請瀏覽 http://go.microsoft.com/fwlink/?LinkId=301864
+        // Properties
+        public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
+
+        public static string PublicClientId { get; private set; }
+
+
+        // Methods
         public void ConfigureAuth(IAppBuilder app)
         {
             // 設定資料庫內容、使用者管理員和登入管理員，以針對每個要求使用單一執行個體
@@ -43,16 +49,16 @@ namespace CLK.AspNet.Identity.WebSite
 
             // 設定 OAuth 基礎流程的應用程式
             // 讓應用程式使用 Bearer 權杖驗證使用者
-            var PublicClientId = "self";
-            var OAuthOptions = new OAuthAuthorizationServerOptions
+            Startup.PublicClientId = "self";
+            Startup.OAuthOptions = new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/Token"),
-                Provider = new ApplicationOAuthProvider(PublicClientId),
+                Provider = new ApplicationOAuthProvider(Startup.PublicClientId),
                 AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),               
                 AllowInsecureHttp = true  // 在生產模式中設定 AllowInsecureHttp = false
             };            
-            app.UseOAuthBearerTokens(OAuthOptions);
+            app.UseOAuthBearerTokens(Startup.OAuthOptions);
 
             // 讓應用程式在雙因素驗證程序中驗證第二個因素時暫時儲存使用者資訊。
             app.UseTwoFactorSignInCookie(DefaultAuthenticationTypes.TwoFactorCookie, TimeSpan.FromMinutes(5));

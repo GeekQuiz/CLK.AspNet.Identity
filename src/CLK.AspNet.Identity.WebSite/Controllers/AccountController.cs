@@ -9,11 +9,12 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CLK.AspNet.Identity.WebSite.Models;
+using Microsoft.Owin.Infrastructure;
 
 namespace CLK.AspNet.Identity.WebSite.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public partial class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -481,5 +482,37 @@ namespace CLK.AspNet.Identity.WebSite.Controllers
             }
         }
         #endregion
+    }
+}
+
+namespace CLK.AspNet.Identity.WebSite.Controllers
+{
+    [Authorize]
+    public partial class AccountController : Controller
+    {
+        [Authorize]
+        public async Task<ActionResult> Token()
+        {
+            // ApplicationUser
+            var applicationUser = await this.UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (applicationUser == null) throw new InvalidOperationException();
+
+            // ClaimsIdentity
+            var claimsIdentity = await applicationUser.GenerateUserIdentityAsync(this.UserManager, OAuthDefaults.AuthenticationType);
+            if (claimsIdentity == null) throw new InvalidOperationException();
+
+            // Ticket
+            var currentUtcNow = new SystemClock().UtcNow;
+            AuthenticationTicket ticket = new AuthenticationTicket(claimsIdentity, new AuthenticationProperties());
+            ticket.Properties.IssuedUtc = currentUtcNow;
+            ticket.Properties.ExpiresUtc = currentUtcNow.Add(TimeSpan.FromMinutes(30));
+
+            // AccessToken
+            string accessToken = Startup.OAuthOptions.AccessTokenFormat.Protect(ticket);
+            if (string.IsNullOrEmpty(accessToken) == true) throw new InvalidOperationException();
+
+            // Return
+            return View(new TokenViewModel { AccessToken = accessToken });
+        }
     }
 }

@@ -13,6 +13,11 @@ namespace CLK.AspNet.Identity.WebSite.Controllers
             return View();
         }
 
+        public ActionResult Access()
+        {
+            return View();
+        }
+
         [RBACAuthorize(Permission = "AboutAccess")]
         public ActionResult About()
         {
