@@ -52,13 +52,13 @@ namespace CLK.AspNet.Identity.Mvc
             if (base.AuthorizeCore(httpContext) == false) return false;
 
             // PermissionAuthorize
-            var permissionAuthorize = this.GetPermissionAuthorize(httpContext);
+            var permissionAuthorize = this.GetPermissionAuthorize();
             if (permissionAuthorize == null) throw new InvalidOperationException();
 
             // Authorize
             return permissionAuthorize.Authorize(httpContext.User, this.Permission);
         }
 
-        protected abstract PermissionAuthorize GetPermissionAuthorize(HttpContextBase httpContext);
+        protected abstract PermissionAuthorize GetPermissionAuthorize();
     }
 }

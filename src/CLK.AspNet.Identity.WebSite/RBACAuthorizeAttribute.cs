@@ -10,9 +10,9 @@ namespace CLK.AspNet.Identity.WebSite
     public class RBACAuthorizeAttribute : CLK.AspNet.Identity.Mvc.RBACAuthorizeAttribute
     {
         // Methods
-        protected override PermissionAuthorize GetPermissionAuthorize(HttpContextBase httpContext)
+        protected override PermissionAuthorize GetPermissionAuthorize()
         {
-            return new ApplicationPermissionAuthorize(httpContext.GetOwinContext().Get<ApplicationPermissionManager>());
+            return new ApplicationPermissionAuthorize(HttpContext.Current.GetOwinContext().Get<ApplicationPermissionManager>());
         }
     }
 }

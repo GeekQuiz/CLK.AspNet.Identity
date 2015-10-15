@@ -208,6 +208,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="RBACAuthorizeAttribute.cs" />
+    <Compile Include="RBACAuthorizeExtensions.cs" />
+    <Compile Include="RBACAuthorizeHelper.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
