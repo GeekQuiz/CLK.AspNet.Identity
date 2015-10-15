@@ -1,7 +1,7 @@
 #[ASP.NET MVC] 使用CLK.AspNet.Identity提供以角色為基礎的存取控制(RBAC)#
 
 
-##前言##
+##問題情景##
 
 ASP.NET Identity是微軟所貢獻的開源專案，用來提供ASP.NET的驗證、授權機制。而在ASP.NET Identity的功能模組中：是採用Claims-Based驗證來提供驗證機制、並且實作Role-Based授權來提供授權機制。開發人員在系統內套用ASP.NET Identity後，就可以像下列範例一樣定義使用者屬於哪個角色、哪個角色可以使用那些功能，後續使用者通過驗證之後，就可以依照角色授權來使用系統功能。
 
@@ -26,6 +26,8 @@ ASP.NET Identity授權機制，可以在系統運行中動態變更使用者所�
 
 	![前言02](http://Files.Dotblogs.com.tw/clark/1506/2015610103715901.png)
 
+
+##解決方案##
 
 本篇文章介紹一個基於ASP.NET Identity開發設計的驗證授權模組：CLK.AspNet.Identity。這個驗證授權模組提供[以角色為基礎的存取控制(Role-based access control, RBAC)](http://en.wikipedia.org/wiki/Role-based_access_control)，將系統授權拆解為User(使用者)、Role(角色)、Permission(權限)。開發人員在系統內套用CLK.AspNet.Identity後，就可以像下列範例一樣定義使用者屬於哪個角色、哪個角色擁有那些權限、權限可以使用哪些功能，後續使用者通過驗證之後，就可以依照角色權限來使用系統功能。
 
@@ -54,7 +56,8 @@ CLK.AspNet.Identity授權機制，除了可以繼續使用繼承自ASP.NET Ident
 
 	![前言05](http://Files.Dotblogs.com.tw/clark/1506/201561010389416.png)
 
-##安裝##
+
+##建立站台##
 
 1. 首先開啟Visual Studio建立一個「**完全空白**」的ASP.NET Web 應用程式。
 
