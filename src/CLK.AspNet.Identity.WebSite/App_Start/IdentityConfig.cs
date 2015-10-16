@@ -50,6 +50,8 @@ namespace CLK.AspNet.Identity.WebSite.Models
             // Default - Permission
             const string aboutPermissionName = "AboutAccess";
             const string contactPermissionName = "ContactAccess";
+            const string productAddPermissionName = "ProductAddAccess";
+            const string productRemovePermissionName = "ProductRemoveAccess";
 
 
             // Manager
@@ -105,6 +107,19 @@ namespace CLK.AspNet.Identity.WebSite.Models
                 permissionManager.Create(contactPermission);
             }
 
+            var productAddPermission = permissionManager.FindByName(productAddPermissionName);
+            if (productAddPermission == null)
+            {
+                productAddPermission = new ApplicationPermission(productAddPermissionName);
+                permissionManager.Create(productAddPermission);
+            }
+
+            var productRemovePermission = permissionManager.FindByName(productRemovePermissionName);
+            if (productRemovePermission == null)
+            {
+                productRemovePermission = new ApplicationPermission(productRemovePermissionName);
+                permissionManager.Create(productRemovePermission);
+            }
 
             // UserAddToRole 
             IList<string> rolesForUser = null;
@@ -120,8 +135,7 @@ namespace CLK.AspNet.Identity.WebSite.Models
             {
                 userManager.AddToRole(guestUser.Id, guestRole.Name);
             }
-
-
+            
             // PermissionAddToRole 
             IList<string> rolesForPermission = null;
 

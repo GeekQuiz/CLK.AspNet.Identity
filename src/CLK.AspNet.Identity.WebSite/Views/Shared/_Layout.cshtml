@@ -36,6 +36,15 @@
             </div>
         </div>
     </div>
+    @if (Request.IsAuthenticated)
+    {
+        <div class="col-md-12" style="background-color:#222">
+            <div class="container">
+                @if (User.HasPermission("ProductAddAccess")) { @Html.ActionLink("Product add", "Add", "Product", null, new { @class = "btn btn-primary" }) }
+                @if (User.HasPermission("ProductRemoveAccess")) { @Html.ActionLink("Product remove", "Remove", "Product", null, new { @class = "btn btn-primary" }) }
+            </div>
+        </div>
+    }
     <div class="container body-content">
         @RenderBody()
         <hr />
