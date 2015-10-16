@@ -150,6 +150,18 @@ namespace CLK.AspNet.Identity.WebSite.Models
             {
                 permissionManager.AddToRole(contactPermission.Id, adminRole.Name);
             }
+
+            rolesForPermission = permissionManager.GetRolesById(productAddPermission.Id);
+            if (rolesForPermission.Contains(adminRole.Name) == false)
+            {
+                permissionManager.AddToRole(productAddPermission.Id, adminRole.Name);
+            }
+
+            rolesForPermission = permissionManager.GetRolesById(productRemovePermission.Id);
+            if (rolesForPermission.Contains(adminRole.Name) == false)
+            {
+                permissionManager.AddToRole(productRemovePermission.Id, adminRole.Name);
+            }
         }
     }
 
