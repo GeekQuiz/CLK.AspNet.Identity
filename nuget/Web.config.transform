@@ -2,8 +2,8 @@
 
 <configuration>
 
-  <connectionStrings>
-    <add name="DefaultConnection" connectionString="Data Source=(LocalDb)\v11.0;Initial Catalog=$rootnamespace$;Integrated Security=SSPI" providerName="System.Data.SqlClient" />
-  </connectionStrings>
+    <connectionStrings>
+        <add name="DefaultConnection" connectionString="Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=$rootnamespace$;Integrated Security=True" providerName="System.Data.SqlClient" />
+    </connectionStrings>
 
  </configuration>

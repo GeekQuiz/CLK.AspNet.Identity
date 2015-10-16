@@ -17,6 +17,6 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="..\Sources\CLK.AspNet.Identity\bin\Release\CLK.AspNet.Identity.dll" target="lib\net45" />
+        <file src="..\src\CLK.AspNet.Identity\bin\Release\CLK.AspNet.Identity.dll" target="lib\net45" />
     </files>
 </package>

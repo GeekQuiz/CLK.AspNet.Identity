@@ -1,0 +1,3 @@
+$rootnamespace$
+
+Install-Package CLK.AspNet.Identity.Mvc.Template -Source C:\Dropbox\Work\GitHub\CLK.AspNet.Identity\nuget\
