@@ -3,6 +3,8 @@ using CLK.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.DataProtection;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -19,7 +21,7 @@ namespace CLK.AspNet.Identity.WebSite.Models
         static ApplicationDbContext()
         {
             // Database
-            Database.SetInitializer(new DropCreateForModelChangesDbInitializer<ApplicationDbContext>(InitializeIdentity));
+            Database.SetInitializer(new DropCreateForModelChangesDbInitializer<ApplicationDbContext>(Initialize));
         }
 
 
@@ -29,140 +31,150 @@ namespace CLK.AspNet.Identity.WebSite.Models
             return new ApplicationDbContext("DefaultConnection");
         }
 
-        public static void InitializeIdentity(ApplicationDbContext context)
+        public static void Initialize(ApplicationDbContext context)
         {
             #region Contracts
 
             if (context == null) throw new ArgumentNullException();
 
             #endregion
-
-            // Default - User
-            const string adminUserName = "admin@example.com";
-            const string adminUserPassword = "admin";
-
-            const string guestUserName = "guest@example.com";
-            const string guestUserPassword = "guest";
-
-            // Default - Role
-            const string adminRoleName = "Admin";
-            const string guestRoleName = "Guest";
-
-            // Default - Permission
-            const string aboutPermissionName = "AboutAccess";
-            const string contactPermissionName = "ContactAccess";
-            const string productAddPermissionName = "ProductAddAccess";
-            const string productRemovePermissionName = "ProductRemoveAccess";
-
-
-            // Manager
-            var userManager = HttpContext.Current.GetOwinContext().Get<ApplicationUserManager>();
-            var roleManager = HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
-            var permissionManager = HttpContext.Current.GetOwinContext().Get<ApplicationPermissionManager>();
-
-
-            // User
-            var adminUser = userManager.FindByName(adminUserName);
-            if (adminUser == null)
-            {
-                adminUser = new ApplicationUser { UserName = adminUserName, Email = adminUserName };
-                userManager.Create(adminUser, adminUserPassword);
-                userManager.SetLockoutEnabled(adminUser.Id, false);
-            }
-
-            var guestUser = userManager.FindByName(guestUserName);
-            if (guestUser == null)
-            {
-                guestUser = new ApplicationUser { UserName = guestUserName, Email = guestUserName };
-                userManager.Create(guestUser, guestUserPassword);
-                userManager.SetLockoutEnabled(guestUser.Id, false);
-            }
-
-            // Role
-            var adminRole = roleManager.FindByName(adminRoleName);
-            if (adminRole == null)
-            {
-                adminRole = new ApplicationRole(adminRoleName);
-                roleManager.Create(adminRole);
-            }
-
-            var guestRole = roleManager.FindByName(guestRoleName);
-            if (guestRole == null)
-            {
-                guestRole = new ApplicationRole(guestRoleName);
-                roleManager.Create(guestRole);
-            }
-
-            // Permission
-            var aboutPermission = permissionManager.FindByName(aboutPermissionName);
-            if (aboutPermission == null)
-            {
-                aboutPermission = new ApplicationPermission(aboutPermissionName);
-                permissionManager.Create(aboutPermission);
-            }
-
-            var contactPermission = permissionManager.FindByName(contactPermissionName);
-            if (contactPermission == null)
-            {
-                contactPermission = new ApplicationPermission(contactPermissionName);
-                permissionManager.Create(contactPermission);
-            }
-
-            var productAddPermission = permissionManager.FindByName(productAddPermissionName);
-            if (productAddPermission == null)
-            {
-                productAddPermission = new ApplicationPermission(productAddPermissionName);
-                permissionManager.Create(productAddPermission);
-            }
-
-            var productRemovePermission = permissionManager.FindByName(productRemovePermissionName);
-            if (productRemovePermission == null)
-            {
-                productRemovePermission = new ApplicationPermission(productRemovePermissionName);
-                permissionManager.Create(productRemovePermission);
-            }
-
-            // UserAddToRole 
-            IList<string> rolesForUser = null;
-
-            rolesForUser = userManager.GetRoles(adminUser.Id);
-            if (rolesForUser.Contains(adminRole.Name) == false)
-            {
-                userManager.AddToRole(adminUser.Id, adminRole.Name);
-            }
-
-            rolesForUser = userManager.GetRoles(guestUser.Id);
-            if (rolesForUser.Contains(guestRole.Name) == false)
-            {
-                userManager.AddToRole(guestUser.Id, guestRole.Name);
-            }
             
-            // PermissionAddToRole 
-            IList<string> rolesForPermission = null;
+            // Manager
+            var userManager = ApplicationUserManager.Create(context);
+            var roleManager = ApplicationRoleManager.Create(context);
+            var permissionManager = ApplicationPermissionManager.Create(context);
 
-            rolesForPermission = permissionManager.GetRolesById(aboutPermission.Id);
-            if (rolesForPermission.Contains(adminRole.Name) == false)
+            // Initialize
+            try
             {
-                permissionManager.AddToRole(aboutPermission.Id, adminRole.Name);
-            }
+                // Default - User
+                const string adminUserName = "admin@example.com";
+                const string adminUserPassword = "admin";
 
-            rolesForPermission = permissionManager.GetRolesById(contactPermission.Id);
-            if (rolesForPermission.Contains(adminRole.Name) == false)
-            {
-                permissionManager.AddToRole(contactPermission.Id, adminRole.Name);
-            }
+                const string guestUserName = "guest@example.com";
+                const string guestUserPassword = "guest";
 
-            rolesForPermission = permissionManager.GetRolesById(productAddPermission.Id);
-            if (rolesForPermission.Contains(adminRole.Name) == false)
-            {
-                permissionManager.AddToRole(productAddPermission.Id, adminRole.Name);
-            }
+                // Default - Role
+                const string adminRoleName = "Admin";
+                const string guestRoleName = "Guest";
 
-            rolesForPermission = permissionManager.GetRolesById(productRemovePermission.Id);
-            if (rolesForPermission.Contains(adminRole.Name) == false)
-            {
-                permissionManager.AddToRole(productRemovePermission.Id, adminRole.Name);
+                // Default - Permission
+                const string aboutPermissionName = "AboutAccess";
+                const string contactPermissionName = "ContactAccess";
+                const string productAddPermissionName = "ProductAddAccess";
+                const string productRemovePermissionName = "ProductRemoveAccess";
+
+
+                // User
+                var adminUser = userManager.FindByName(adminUserName);
+                if (adminUser == null)
+                {
+                    adminUser = new ApplicationUser { UserName = adminUserName, Email = adminUserName };
+                    userManager.Create(adminUser, adminUserPassword);
+                    userManager.SetLockoutEnabled(adminUser.Id, false);
+                }
+
+                var guestUser = userManager.FindByName(guestUserName);
+                if (guestUser == null)
+                {
+                    guestUser = new ApplicationUser { UserName = guestUserName, Email = guestUserName };
+                    userManager.Create(guestUser, guestUserPassword);
+                    userManager.SetLockoutEnabled(guestUser.Id, false);
+                }
+
+                // Role
+                var adminRole = roleManager.FindByName(adminRoleName);
+                if (adminRole == null)
+                {
+                    adminRole = new ApplicationRole(adminRoleName);
+                    roleManager.Create(adminRole);
+                }
+
+                var guestRole = roleManager.FindByName(guestRoleName);
+                if (guestRole == null)
+                {
+                    guestRole = new ApplicationRole(guestRoleName);
+                    roleManager.Create(guestRole);
+                }
+
+                // Permission
+                var aboutPermission = permissionManager.FindByName(aboutPermissionName);
+                if (aboutPermission == null)
+                {
+                    aboutPermission = new ApplicationPermission(aboutPermissionName);
+                    permissionManager.Create(aboutPermission);
+                }
+
+                var contactPermission = permissionManager.FindByName(contactPermissionName);
+                if (contactPermission == null)
+                {
+                    contactPermission = new ApplicationPermission(contactPermissionName);
+                    permissionManager.Create(contactPermission);
+                }
+
+                var productAddPermission = permissionManager.FindByName(productAddPermissionName);
+                if (productAddPermission == null)
+                {
+                    productAddPermission = new ApplicationPermission(productAddPermissionName);
+                    permissionManager.Create(productAddPermission);
+                }
+
+                var productRemovePermission = permissionManager.FindByName(productRemovePermissionName);
+                if (productRemovePermission == null)
+                {
+                    productRemovePermission = new ApplicationPermission(productRemovePermissionName);
+                    permissionManager.Create(productRemovePermission);
+                }
+
+                // UserAddToRole 
+                IList<string> rolesForUser = null;
+
+                rolesForUser = userManager.GetRoles(adminUser.Id);
+                if (rolesForUser.Contains(adminRole.Name) == false)
+                {
+                    userManager.AddToRole(adminUser.Id, adminRole.Name);
+                }
+
+                rolesForUser = userManager.GetRoles(guestUser.Id);
+                if (rolesForUser.Contains(guestRole.Name) == false)
+                {
+                    userManager.AddToRole(guestUser.Id, guestRole.Name);
+                }
+
+                // PermissionAddToRole 
+                IList<string> rolesForPermission = null;
+
+                rolesForPermission = permissionManager.GetRolesById(aboutPermission.Id);
+                if (rolesForPermission.Contains(adminRole.Name) == false)
+                {
+                    permissionManager.AddToRole(aboutPermission.Id, adminRole.Name);
+                }
+
+                rolesForPermission = permissionManager.GetRolesById(contactPermission.Id);
+                if (rolesForPermission.Contains(adminRole.Name) == false)
+                {
+                    permissionManager.AddToRole(contactPermission.Id, adminRole.Name);
+                }
+
+                rolesForPermission = permissionManager.GetRolesById(productAddPermission.Id);
+                if (rolesForPermission.Contains(adminRole.Name) == false)
+                {
+                    permissionManager.AddToRole(productAddPermission.Id, adminRole.Name);
+                }
+
+                rolesForPermission = permissionManager.GetRolesById(productRemovePermission.Id);
+                if (rolesForPermission.Contains(adminRole.Name) == false)
+                {
+                    permissionManager.AddToRole(productRemovePermission.Id, adminRole.Name);
+                }
             }
+            finally
+            {
+                // Dispose
+                userManager.Dispose();
+                roleManager.Dispose();
+                permissionManager.Dispose();
+            }            
         }
     }
 
@@ -173,15 +185,19 @@ namespace CLK.AspNet.Identity.WebSite.Models
         // Methods
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
+            return ApplicationUserManager.Create(context.Get<ApplicationDbContext>(), options.DataProtectionProvider);
+        }
+
+        public static ApplicationUserManager Create(ApplicationDbContext context, IDataProtectionProvider dataProtectionProvider = null)
+        {
             #region Contracts
 
-            if (options == null) throw new ArgumentNullException();
             if (context == null) throw new ArgumentNullException();
 
             #endregion
 
             // 建立使用者管理員
-            var userManager = new ApplicationUserManager(context.Get<ApplicationDbContext>());
+            var userManager = new ApplicationUserManager(context);
             if (userManager == null) throw new InvalidOperationException();
 
             // 設定使用者名稱的驗證邏輯
@@ -219,7 +235,6 @@ namespace CLK.AspNet.Identity.WebSite.Models
             });
             userManager.EmailService = new EmailService();
             userManager.SmsService = new SmsService();
-            var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
                 userManager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
@@ -235,7 +250,12 @@ namespace CLK.AspNet.Identity.WebSite.Models
         // Methods
         public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
         {
-            return new ApplicationRoleManager(context.Get<ApplicationDbContext>());
+            return ApplicationRoleManager.Create(context.Get<ApplicationDbContext>());
+        }
+
+        public static ApplicationRoleManager Create(ApplicationDbContext context)
+        {
+            return new ApplicationRoleManager(context);
         }
     }
 
@@ -244,7 +264,12 @@ namespace CLK.AspNet.Identity.WebSite.Models
         // Methods
         public static ApplicationPermissionManager Create(IdentityFactoryOptions<ApplicationPermissionManager> options, IOwinContext context)
         {
-            return new ApplicationPermissionManager(context.Get<ApplicationDbContext>());
+            return ApplicationPermissionManager.Create(context.Get<ApplicationDbContext>());
+        }
+
+        public static ApplicationPermissionManager Create(ApplicationDbContext context)
+        {
+            return new ApplicationPermissionManager(context);
         }
     }
 
@@ -253,7 +278,12 @@ namespace CLK.AspNet.Identity.WebSite.Models
         // Methods
         public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
         {
-            return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
+            return ApplicationSignInManager.Create(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
+        }
+
+        public static ApplicationSignInManager Create(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)
+        {
+            return new ApplicationSignInManager(userManager, authenticationManager);
         }
 
         public override Task<ClaimsIdentity> CreateUserIdentityAsync(ApplicationUser user)
