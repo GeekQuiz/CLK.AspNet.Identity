@@ -3,7 +3,7 @@
 <configuration>
 
     <connectionStrings>
-        <add name="DefaultConnection" connectionString="Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=$rootnamespace$;Integrated Security=True" providerName="System.Data.SqlClient" />
+        <add name="DefaultConnection" connectionString="Data Source=(LocalDb)\MSSQLLocalDB;AttachDBFilename=|DataDirectory|CLK.AspNet.Identity.mdf;Integrated Security=True" providerName="System.Data.SqlClient" />
     </connectionStrings>
 
  </configuration>

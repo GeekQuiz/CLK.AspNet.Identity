@@ -71,7 +71,7 @@
         </dependencies>
     </metadata>
     <files>
-        
+                
         <file src="CLK.AspNet.Identity.Mvc.Template\App_Start\*.*"                  target="content\App_Start" />
         <file src="CLK.AspNet.Identity.Mvc.Template\Content\Site.css"               target="content\Content" />
         <file src="CLK.AspNet.Identity.Mvc.Template\Controllers\*.*"                target="content\Controllers" />
@@ -86,7 +86,9 @@
         <file src="CLK.AspNet.Identity.Mvc.Template\Views\RolesAdmin\*.*"           target="content\Views\RolesAdmin" />
         <file src="CLK.AspNet.Identity.Mvc.Template\Views\Shared\*.*"               target="content\Views\Shared" />
         <file src="CLK.AspNet.Identity.Mvc.Template\Views\UsersAdmin\*.*"           target="content\Views\UsersAdmin" />
-                 
+        
+        <file src="CLK.AspNet.Identity.mdf"                                         target="content\App_Data" />
+        <file src="CLK.AspNet.Identity_log.ldf"                                     target="content\App_Data" />         
         <file src="CLK.AspNet.Identity.Mvc.Template\Global.asax.cs.pp"              target="content" />
         <file src="CLK.AspNet.Identity.Mvc.Template\Global.asax.pp"                 target="content" />
         <file src="CLK.AspNet.Identity.Mvc.Template\Project_Readme.html"            target="content" />

@@ -300,7 +300,9 @@
     <Content Include="Views\Product\Add.cshtml" />
     <Content Include="Views\Product\Remove.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
