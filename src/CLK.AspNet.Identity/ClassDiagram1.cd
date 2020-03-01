@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CLK.AspNet.Identity.PermissionManagerExtensions" Collapsed="true">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAEAAAAAAAAAAAAAAAAAEBAGAABAIAAAACAAA=</HashCode>
+      <FileName>Extensions\PermissionManagerExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CLK.AspNet.Identity.PermissionAuthorize" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PermissionAuthorize.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CLK.AspNet.Identity.PermissionAuthorize&lt;TPermission, TKey&gt;" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>PermissionAuthorize.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CLK.AspNet.Identity.PermissionManager&lt;TPermission, TKey&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAQCAUgkAAAAAAIAAAAgAACAiAEAAAAYAAIIQ=</HashCode>
+      <FileName>PermissionManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CLK.AspNet.Identity.PermissionValidator&lt;TPermission, TKey&gt;" Collapsed="true">
+    <Position X="5.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAQAAAAA=</HashCode>
+      <FileName>PermissionValidator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CLK.AspNet.Identity.Resources" Collapsed="true">
+    <Position X="7" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAIABAAACAAAAAEAABEAAAAQAIAAAABAAAAIAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.AspNet.Identity.AsyncHelper" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Internals\AsyncHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.AspNet.Identity.TaskExtensions" Collapsed="true">
+    <Position X="8.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Internals\TaskExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="CLK.AspNet.Identity.IPermission&lt;TKey&gt;" Collapsed="true">
+    <Position X="5.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IPermission.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CLK.AspNet.Identity.IPermissionRoleStore&lt;TPermission, TKey&gt;" Collapsed="true">
+    <Position X="2.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAACAAAAAQAAAAAQ=</HashCode>
+      <FileName>IPermissionRoleStore.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CLK.AspNet.Identity.IPermissionStore&lt;TPermission, TKey&gt;" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAACAgAAAAAAIAAAIA=</HashCode>
+      <FileName>IPermissionStore.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CLK.AspNet.Identity.IQueryablePermissionStore&lt;TPermission, TKey&gt;" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>IQueryablePermissionStore.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Microsoft JhengHei UI" Size="9" />
+</ClassDiagram>

@@ -23,14 +23,23 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Access", "Access", "Home")</li>
-
-                    @if (Request.IsAuthenticated) {
+                    @if (User.HasPermission("ContactAccess"))
+                    {
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    }
+                    @if (User.HasPermission("AccessAccess"))
+                    {
+                        <li>@Html.ActionLink("Access", "Access", "Home")</li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
                         <li>@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin")</li>
                         <li>@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")</li>
                         <li>@Html.ActionLink("PermissionsAdmin", "Index", "PermissionsAdmin")</li>
                     }
+                    @*@if (Request.IsAuthenticated)
+        {
+        }*@
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

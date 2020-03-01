@@ -13,16 +13,16 @@ namespace CLK.AspNet.Identity.WebSite.Controllers
             return View();
         }
 
-        public ActionResult Access()
-        {
-            return View();
-        }
-
-        [RBACAuthorize(Permission = "AboutAccess")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
+            return View();
+        }
+
+        [RBACAuthorize(Permission = "AccessAccess")]
+        public ActionResult Access()
+        {
             return View();
         }
 

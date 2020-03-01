@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace CLK.AspNet.Identity.WebSite.Models
 {
@@ -35,37 +34,44 @@ namespace CLK.AspNet.Identity.WebSite.Models
         {
             #region Contracts
 
-            if (context == null) throw new ArgumentNullException();
+            if (context == null) 
+                throw new ArgumentNullException();
 
             #endregion
-            
-            // Manager
-            var userManager = ApplicationUserManager.Create(context);
-            var roleManager = ApplicationRoleManager.Create(context);
-            var permissionManager = ApplicationPermissionManager.Create(context);
 
-            // Initialize
+            #region 產生人員權限管理物件(Manager)
+            #region 使用者物件
+            ApplicationUserManager userManager = ApplicationUserManager.Create(context);
+            #endregion
+            #region 角色物件
+            ApplicationRoleManager roleManager = ApplicationRoleManager.Create(context);
+            #endregion
+            #region 讀取權限物件
+            ApplicationPermissionManager permissionManager = ApplicationPermissionManager.Create(context);
+            #endregion
+            #endregion
+
+            #region 初始化人員權限管理(Initialize)
             try
             {
-                // Default - User
+                #region 預設的使用者(Default - User)
                 const string adminUserName = "admin@example.com";
-                const string adminUserPassword = "admin";
+                const string adminUserPassword = "admin123";
 
                 const string guestUserName = "guest@example.com";
-                const string guestUserPassword = "guest";
-
-                // Default - Role
+                const string guestUserPassword = "guest123";
+                #endregion
+                #region 預設的角色(Default - Role)
                 const string adminRoleName = "Admin";
                 const string guestRoleName = "Guest";
-
-                // Default - Permission
-                const string aboutPermissionName = "AboutAccess";
+                #endregion
+                #region 預設的讀取權限(Default - Permission)
+                const string accessPermissionName = "AccessAccess";
                 const string contactPermissionName = "ContactAccess";
                 const string productAddPermissionName = "ProductAddAccess";
                 const string productRemovePermissionName = "ProductRemoveAccess";
-
-
-                // User
+                #endregion
+                #region 新增預設的使用者(Setup Default - User)
                 var adminUser = userManager.FindByName(adminUserName);
                 if (adminUser == null)
                 {
@@ -81,8 +87,8 @@ namespace CLK.AspNet.Identity.WebSite.Models
                     userManager.Create(guestUser, guestUserPassword);
                     userManager.SetLockoutEnabled(guestUser.Id, false);
                 }
-
-                // Role
+                #endregion
+                #region 新增預設的角色(Setup Default - Role)
                 var adminRole = roleManager.FindByName(adminRoleName);
                 if (adminRole == null)
                 {
@@ -96,13 +102,13 @@ namespace CLK.AspNet.Identity.WebSite.Models
                     guestRole = new ApplicationRole(guestRoleName);
                     roleManager.Create(guestRole);
                 }
-
-                // Permission
-                var aboutPermission = permissionManager.FindByName(aboutPermissionName);
-                if (aboutPermission == null)
+                #endregion
+                #region 新增預設的讀取權限(Setup Default - Permission)
+                var accessPermission = permissionManager.FindByName(accessPermissionName);
+                if (accessPermission == null)
                 {
-                    aboutPermission = new ApplicationPermission(aboutPermissionName);
-                    permissionManager.Create(aboutPermission);
+                    accessPermission = new ApplicationPermission(accessPermissionName);
+                    permissionManager.Create(accessPermission);
                 }
 
                 var contactPermission = permissionManager.FindByName(contactPermissionName);
@@ -125,8 +131,8 @@ namespace CLK.AspNet.Identity.WebSite.Models
                     productRemovePermission = new ApplicationPermission(productRemovePermissionName);
                     permissionManager.Create(productRemovePermission);
                 }
-
-                // UserAddToRole 
+                #endregion
+                #region 導入角色給預設的使用者(UserAddToRole)
                 IList<string> rolesForUser = null;
 
                 rolesForUser = userManager.GetRoles(adminUser.Id);
@@ -140,14 +146,14 @@ namespace CLK.AspNet.Identity.WebSite.Models
                 {
                     userManager.AddToRole(guestUser.Id, guestRole.Name);
                 }
-
-                // PermissionAddToRole 
+                #endregion
+                #region 導入讀取權限給角色(PermissionAddToRole)
                 IList<string> rolesForPermission = null;
 
-                rolesForPermission = permissionManager.GetRolesById(aboutPermission.Id);
+                rolesForPermission = permissionManager.GetRolesById(accessPermission.Id);
                 if (rolesForPermission.Contains(adminRole.Name) == false)
                 {
-                    permissionManager.AddToRole(aboutPermission.Id, adminRole.Name);
+                    permissionManager.AddToRole(accessPermission.Id, adminRole.Name);
                 }
 
                 rolesForPermission = permissionManager.GetRolesById(contactPermission.Id);
@@ -167,6 +173,7 @@ namespace CLK.AspNet.Identity.WebSite.Models
                 {
                     permissionManager.AddToRole(productRemovePermission.Id, adminRole.Name);
                 }
+                #endregion
             }
             finally
             {
@@ -174,7 +181,8 @@ namespace CLK.AspNet.Identity.WebSite.Models
                 userManager.Dispose();
                 roleManager.Dispose();
                 permissionManager.Dispose();
-            }            
+            }
+            #endregion
         }
     }
 
