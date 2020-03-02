@@ -20,8 +20,13 @@ CLK.AspNet.Identity是一個基於ASP.NET Identity擴展設計的驗證授權模
     }
 
 
-##說明##
+## 說明
 
-####[[ASP.NET MVC] 使用CLK.AspNet.Identity提供以角色為基礎的存取控制(RBAC)](http://www.dotblogs.com.tw/clark/archive/2015/06/08/151513.aspx)####
+### [CLK.AspNet.Identity - Google 搜尋](https://www.google.com/search?q=CLK.AspNet.Identity&rlz=1C1OPRB_enTW872TW873&oq=CLK.AspNet.Identity&aqs=chrome..69i57j69i60l3.9614j0j1&sourceid=chrome&ie=UTF-8)
 
-####[[ASP.NET MVC] 使用CLK.AspNet.Identity提供依權限顯示選單項目的功能](http://www.dotblogs.com.tw/clark/archive/2015/10/18/153597.aspx)####
+#### [[ASP.NET MVC] 使用CLK.AspNet.Identity提供以角色為基礎的存取控制(RBAC)](http://www.dotblogs.com.tw/clark/archive/2015/06/08/151513.aspx)
+
+#### [[ASP.NET MVC] 使用CLK.AspNet.Identity提供依權限顯示選單項目的功能](http://www.dotblogs.com.tw/clark/archive/2015/10/18/153597.aspx)
+
+#### [ASP.NET-MVC-使用CLK.AspNet.Identity提供以角色為基礎的存取控制(RBAC)](http://clark159.github.io/2015/06/08/ASP.NET-MVC-使用CLK.AspNet.Identity提供以角色為基礎的存取控制(RBAC)/)
+##### [引用Nuget的專案](Solution4CLKAspNetIdentity/WebApp4CLKAspNetIdentity)
