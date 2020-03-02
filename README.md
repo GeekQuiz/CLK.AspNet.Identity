@@ -30,3 +30,4 @@ CLK.AspNet.Identity是一個基於ASP.NET Identity擴展設計的驗證授權模
 
 #### [ASP.NET-MVC-使用CLK.AspNet.Identity提供以角色為基礎的存取控制(RBAC)](http://clark159.github.io/2015/06/08/ASP.NET-MVC-使用CLK.AspNet.Identity提供以角色為基礎的存取控制(RBAC)/)
 ##### [引用Nuget的專案](Solution4CLKAspNetIdentity/WebApp4CLKAspNetIdentity)
+##### [引用JSON的專案](Solution4CLKAspNetIdentity/WebApp4CLKAspNetIdentityUsingJson)

@@ -1,0 +1,30 @@
+@model WebApp4CLKAspNetIdentityUsingJson.Models.TokenViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <script>
+
+        // fields
+        var eventArgs = @Html.Raw(Json.Encode(@Model));
+
+        // callback
+        if(window.opener!=null){
+            if( window.opener.__clk_aspnet_identity_account_tokenCompleted!=null){
+                window.opener.__clk_aspnet_identity_account_tokenCompleted(eventArgs);
+            }
+        }
+
+        // close
+        window.close();
+    </script>
+</head>
+<body>
+</body>
+</html>
