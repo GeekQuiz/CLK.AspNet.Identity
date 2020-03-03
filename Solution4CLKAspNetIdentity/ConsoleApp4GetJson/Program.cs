@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,7 +75,9 @@ namespace ConsoleApp4GetJson
                         new JProperty("UserPassword", UserPassword[1]))
                     ));
             //序列化為JSON字串並輸出結果
-            Console.WriteLine(JsonConvert.SerializeObject(IdObj, Formatting.Indented));
+            string Result = JsonConvert.SerializeObject(IdObj, Formatting.Indented);
+            Console.WriteLine(Result);
+            WriteJsonFile(Result, @"C:\Users\洪有德\source\repos\CLK.AspNet.Identity\Solution4CLKAspNetIdentity\WebApp4CLKAspNetIdentityUsingJson\IdObj.json");
             Console.ReadLine();
             /*Output
 {
@@ -100,6 +103,17 @@ namespace ConsoleApp4GetJson
   ]
 }
 */
+        }
+
+        private static void WriteJsonFile(string JsonString, string FileName)
+        {
+            FileStream fileStream = new FileStream(@FileName, FileMode.Create);
+            fileStream.Close();   //切記開了要關,不然會被佔用而無法修改喔!!!
+            using (StreamWriter sw = new StreamWriter(@FileName))
+            {
+                // 欲寫入的文字資料 ~
+                sw.Write(JsonString);
+            }
         }
     }
 }

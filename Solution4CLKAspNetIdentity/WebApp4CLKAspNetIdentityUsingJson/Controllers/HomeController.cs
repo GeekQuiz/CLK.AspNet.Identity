@@ -1,4 +1,5 @@
 using System.Web.Mvc;
+using WebApp4CLKAspNetIdentityUsingJson.Models;
 
 namespace WebApp4CLKAspNetIdentityUsingJson.Controllers
 {

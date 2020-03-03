@@ -1,0 +1,22 @@
+{
+  "Roles": [
+    "Admin",
+    "Guest"
+  ],
+  "Permissions": [
+    "AccessAccess",
+    "ContactAccess",
+    "ProductAddAccess",
+    "ProductRemoveAccess"
+  ],
+  "Users": [
+    {
+      "UserName": "admin@example.com",
+      "UserPassword": "admin123"
+    },
+    {
+      "UserName": "guest@example.com",
+      "UserPassword": "guest123"
+    }
+  ]
+}

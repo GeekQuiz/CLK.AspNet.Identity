@@ -108,6 +108,9 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp, Version=106.0.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.10.1\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -178,7 +181,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="json.json" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Global.asax" />
     <Content Include="Project_Readme.html" />
@@ -267,6 +269,7 @@
     <Compile Include="RBACAuthorizeAttribute.cs" />
     <Compile Include="RBACAuthorizeExtensions.cs" />
     <Compile Include="RBACAuthorizeHelper.cs" />
+    <Compile Include="ReadJsonFile.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

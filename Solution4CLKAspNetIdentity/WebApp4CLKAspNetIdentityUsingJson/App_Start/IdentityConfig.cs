@@ -31,6 +31,8 @@ namespace WebApp4CLKAspNetIdentityUsingJson.Models
             return new ApplicationDbContext("DefaultConnection");
         }
 
+        public static string JsonFile = @"C:\Users\洪有德\source\repos\CLK.AspNet.Identity\Solution4CLKAspNetIdentity\WebApp4CLKAspNetIdentityUsingJson\IdObj.json";
+
         public static void Initialize(ApplicationDbContext context)
         {
             #region Contracts
@@ -55,22 +57,24 @@ namespace WebApp4CLKAspNetIdentityUsingJson.Models
             #region 初始化人員權限管理(Initialize)
             try
             {
+                ReadJsonFile rjf = new ReadJsonFile();
+                rjf.Action(JsonFile, out string[] UserName, out string[] UserPassword, out string[] Role, out string[] Permission);
                 #region 預設的使用者(Default - User)
-                const string adminUserName = "admin@example.com";
-                const string adminUserPassword = "admin123";
+                string adminUserName = UserName[0];
+                string adminUserPassword = UserPassword[0];
 
-                const string guestUserName = "guest@example.com";
-                const string guestUserPassword = "guest123";
+                string guestUserName = UserName[1];
+                string guestUserPassword = UserPassword[1];
                 #endregion
                 #region 預設的角色(Default - Role)
-                const string adminRoleName = "Admin";
-                const string guestRoleName = "Guest";
+                string adminRoleName = Role[0];
+                string guestRoleName = Role[1];
                 #endregion
                 #region 預設的讀取權限(Default - Permission)
-                const string accessPermissionName = "AccessAccess";
-                const string contactPermissionName = "ContactAccess";
-                const string productAddPermissionName = "ProductAddAccess";
-                const string productRemovePermissionName = "ProductRemoveAccess";
+                string accessPermissionName = Permission[0];
+                string contactPermissionName = Permission[1];
+                string productAddPermissionName = Permission[2];
+                string productRemovePermissionName = Permission[3];
                 #endregion
                 #region 新增預設的使用者(Setup Default - User)
                 var adminUser = userManager.FindByName(adminUserName);
